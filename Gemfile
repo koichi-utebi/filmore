@@ -54,3 +54,13 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'devise'
+
+gem 'kaminari','~> 1.2.1'
+
+gem 'enum_help'
+
+gem 'themoviedb-api', '1.3'
+
+gem 'dotenv-rails'
