@@ -1,0 +1,2 @@
+class WatchedList < ApplicationRecord
+end
