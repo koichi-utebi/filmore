@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'              #フォロー一覧
       get 'followers' => 'relationships#followers', as: 'followers'                 #フォロワー一覧
     end
-    resources :movies, only: [:index, :show]                                      #映画関連
+    resources :movies, only: [:index, :show]                                    #映画関連
+    get '/search' => 'movies#search', as: 'search'
     resources :posts do                                                           #投稿関連
       resource :favorites, only: [:create, :destroy]                                #いいね関連
       resource :comments, only: [:create, :destroy]                                 #コメント関連

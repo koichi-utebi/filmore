@@ -1,0 +1,30 @@
+<div class="container pb-5">
+  <div class="row pt-5">
+    <div class="col-md-3 side-bar">
+      絞り込み機能
+    </div>
+
+    <div class="col-md-9 main-contents">
+      <% if @movie_results.blank? %>
+        <h2 class="text-center">[<%= @search_term %>]と一致する情報が見つかりませんでした</h2>
+      <% else %>
+        <h2 class="text-center">[<%= @search_term %>]の検索結果</h2>
+        <% @movie_results.each do |movie| %>
+        <div class="row mt-3 pb-3 border-bottom">
+          <div class="col-md-3">
+            <%= link_to movie_path(movie['id']) do %>
+              <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '200x300'%>
+            <% end %>
+          </div>
+          <div class="col-md-9">
+            <h4><%= link_to movie['title'], movie_path("#{movie['id']}") %></h4>
+            <p><%= movie['release_date'] %></p>
+            <p><%= movie['overview'] %></p>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+      <%= paginate @movie_results %>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,7 @@
-<h1>Public::Movies#show</h1>
-<p>Find me in app/views/public/movies/show.html.erb</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-4">
+        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path'],class: "rounded", size: '200x300'%>
+    </div>
+  </div>
+</div>
