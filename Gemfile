@@ -61,6 +61,6 @@ gem 'kaminari','~> 1.2.1'
 
 gem 'enum_help'
 
-gem 'themoviedb-api', '1.3'
+gem 'themoviedb-api', '~>1.3'
 
 gem 'dotenv-rails'

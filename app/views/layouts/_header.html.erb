@@ -1,0 +1,56 @@
+<header class="border-bottom">
+  <nav class="navbar navbar-expand-lg navbar-light p-3">
+    <div class="container-fluid">
+      <div>
+        <a class="navbar-brand" href="/"><h1>FILMORE</h1></a> <%#タイトルロゴ%>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="colapse navbar-collapse" id="navbarNavDropdown">
+        <% if admin_signed_in? %> <%#管理者ログインしている場合%>
+        <div class="d-flex flex-column ml-auto">
+          <ul class="navbar-nav">
+            <li>
+              <%= link_to '投稿一覧', admin_root_path, class: "btn btn-outline-dark" %>
+            </li>
+            <li>
+              <% link_to '会員一覧', admin_customers_path, class: "btn btn-outline-dark" %>
+            </li>
+            <li>
+              <% link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
+            </li>
+          </ul>
+        </div>
+        <% elsif customer_signed_in? %> <%#会員ログインしている場合%>
+        <div class="d-flex flex-column ml-auto">
+          <ul class="navbar-nav">
+            <li>
+              <%= link_to '映画一覧', movies_path, class: "ml-2 btn btn-outline-dark" %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "ml-2 btn btn-outline-dark" %>
+            </li>
+            <li>
+              <%= link_to 'マイページ', customer_path(current_customer), class: "ml-2 btn btn-outline-dark" %>
+            </li>
+          </ul>
+        </div>
+        <% else %><%#ログインしていない場合%>
+        <div class="d-flex flex-column ml-auto">
+          <ul class="navbar-nav">
+            <li>
+              <%= link_to 'About', about_path, class: "btn btn-outline-dark" %>
+            </li>
+            <li>
+              <%= link_to '新規登録', new_customer_registration_path, class: "ml-2 btn btn-outline-dark" %>
+            </li>
+            <li>
+              <%= link_to 'ログイン', new_customer_session_path, class: "ml-2 btn btn-outline-dark" %>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</header>
