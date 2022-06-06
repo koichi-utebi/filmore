@@ -24,7 +24,7 @@
         </div>
         <% elsif customer_signed_in? %> <%#会員ログインしている場合%>
         <div class="d-flex flex-column ml-auto">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav d-flex align-items-center">
             <li>
               <%= link_to '映画一覧', movies_path, class: "ml-2 btn btn-outline-dark" %>
             </li>
@@ -32,7 +32,9 @@
               <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "ml-2 btn btn-outline-dark" %>
             </li>
             <li>
-              <%= link_to 'マイページ', customer_path(current_customer), class: "ml-2 btn btn-outline-dark" %>
+              <%= link_to customer_path(current_customer), class: "ml-2 " do %>
+                <%= image_tag current_customer.get_profile_image, class: "rounded-circle", size:'60x60' %>
+              <% end %>
             </li>
           </ul>
         </div>

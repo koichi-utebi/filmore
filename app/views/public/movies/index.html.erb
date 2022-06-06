@@ -1,2 +1,26 @@
-<h1>Public::Movies#index</h1>
-<p>Find me in app/views/public/movies/index.html.erb</p>
+<div class="container">
+
+  <div class="row border-bottom">
+    <div class="col-md-6 mx-auto pt-5">
+      <h2 class="text-center">映画一覧</h2>
+    </div>
+  </div>
+
+  <% i = 0 %>
+  <% while i < 8 %>
+  <div class="row mt-3 pb-3 border-bottom">
+    <div class="col-md-4">
+      <%= link_to movie_path(@movies['table']['results'][i]['table']['id']) do %>
+        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movies['table']['results'][i]['table']['poster_path'],class: "rounded", size: '300x450'%>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <h4><%= link_to @movies['table']['results'][i]['table']['title'], movie_path(@movies['table']['results'][i]['table']['id']) %></h4>
+      <p><%= @movie_info['table']['results'][i]['table']['release_date'] %></p>
+    </div>
+
+  </div>
+  <% i += 1%>
+  <% end %>
+
+</div>
