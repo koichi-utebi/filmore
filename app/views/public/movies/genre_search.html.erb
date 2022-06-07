@@ -13,8 +13,11 @@
     </div>
 
     <div class="col-md-10 main-contents">
-      <h2 class="text-center">[<%= @search_term %>]の検索結果</h2>
-      <% @movie_results.each do |movie| %>
+      <% if @movie_results.blank? %>
+        <h2 class="text-center">[<%= @search_term %>]と一致する情報が見つかりませんでした</h2>
+      <% else %>
+        <h2 class="text-center">[<%= @genre.name %>]の検索結果</h2>
+        <% @movie_results.each do |movie| %>
         <div class="row mt-3 pb-3 border-bottom">
           <div class="col-md-3">
             <%= link_to movie_path(movie['id']) do %>
@@ -31,10 +34,11 @@
                 <p><%= movie['overview'] %></p>
               <% end %>
             <% else %>
-             <p class="text-danger"><表示できるあらずじ情報がありません></p>
-            <% end %>
+           <p class="text-danger"><表示できるあらずじ情報がありません></p>
+          <% end %>
           </div>
         </div>
+        <% end %>
       <% end %>
       <%= paginate @movie_results %>
     </div>

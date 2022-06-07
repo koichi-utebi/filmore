@@ -1,26 +1,42 @@
 <div class="container pb-5">
   <div class="row pt-5">
-    <div class="col-md-3 side-bar">
-      絞り込み機能
+    <div class="col-md-2">
+      <div class="index-side-bar">
+        <h5 class="text-center">主なジャンル<h5>
+        <% @genres.each do |genre| %>
+          <%= form_with model: @genre, url: genre_search_path, method: :get do |f| %>
+            <%= f.hidden_field :genre_id, :value => genre.id %>
+            <%= f.submit genre.name, class: "btn btn-outline-primary btn-sm w-100 mt-1 small"%>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
-    <div class="col-md-9 main-contents">
+    <div class="col-md-10 main-contents pr-5">
       <div class="row border-bottom">
         <div class="col-md-12 mx-atuo">
           <h2 class="text-center">公開中の映画</h2>
         </div>
       </div>
       <% @movies.each do |movie| %>
-      <div class="row mt-3 pb-3 border-bottom">
+      <div class="row mt-3 pb-3 border-bottom index-content-area">
         <div class="col-md-3">
           <%= link_to movie_path(movie['id']) do %>
             <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '200x300'%>
           <% end %>
         </div>
         <div class="col-md-9">
-          <h4><%= link_to movie['title'], movie_path("#{movie['id']}") %></h4>
+          <h5><%= link_to movie['title'], movie_path("#{movie['id']}") %></h5>
           <p><%= movie['release_date'] %></p>
-          <p><%= movie['overview'] %></p>
+          <% if movie['overview'].present? %>
+            <% if movie['overview'].length >= 290 %>
+              <p><%= movie['overview'].slice(0,290) %> ...<%= link_to '>>続きを読む', movie_path("#{movie['id']}") %></p>
+            <% else %>
+              <p><%= movie['overview'] %></p>
+            <% end %>
+          <% else %>
+           <p class="text-danger"><表示できるあらずじ情報がありません></p>
+          <% end %>
         </div>
       </div>
       <% end %>

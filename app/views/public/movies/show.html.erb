@@ -1,7 +1,66 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-md-4">
-        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path'],class: "rounded", size: '200x300'%>
+      <div class="show-poster-img">
+        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path'],class: "rounded mb-3", size: '300x450'%><br/>
+        <span>評価:</span> <%= image_tag 'sample-rate.png', size: '150x30'%>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h4><%= @movie['title']%></h4>
+      <% @movie["genres"].each do |genre| %>
+        <% if genre == @movie["genres"].last %>
+          <span><%= genre["name"] %></span>
+        <% else %>
+          <span><%= genre["name"] %>、</span>
+        <% end %>
+      <% end %>
+      <h5 class="pt-3">解説</h5>
+      <% if @movie['overview'].present? %>
+        <p><%= @movie['overview'] %></p>
+      <% else %>
+        <p class="text-danger"><表示できる情報がありません></p>
+      <% end %>
+      <p>
+        <% unless @movie["runtime"] == 0 %>
+          上映時間: <%= @movie["runtime"] %>分
+        <% end %>
+      </p>
+      <p>
+        <% unless @movie['release_date'].blank? %>
+          公開日:　 <%= @movie['release_date'] %>
+        <% end %>
+      </p>
+
+      <div class="row">
+        <div class="col-md-5">
+          <%= form_with model: @watched_lists, url: watched_lists_path, class: "mr-1", method: :post do |f| %>
+            <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id %>
+            <%= f.submit '視聴済みリストに入れる', class: "btn btn-outline-secondary w-100" %>
+          <% end %>
+        </div>
+        <div class="col-md-5">
+          <%= form_with model: @wish_lists, url: wish_lists_path, class: "ml-1", method: :post do |f| %>
+            <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id %>
+            <%= f.submit 'ウィッシュリストに入れる', class: "btn btn-outline-success w-100" %>
+          <% end %>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-10" >
+          <%= link_to 'レビューを書く', new_post_path, class: "btn btn-primary w-100 text-center" %>
+        </div>
+      </div>
+      <div class="row mt-5 pb-5" style="height: 1000px">
+        <div class="col-md-12 border-bottom">
+          <h3 class="text-center">レビュー一覧</h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>
