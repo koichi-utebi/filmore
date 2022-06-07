@@ -1,6 +1,4 @@
 class Public::MoviesController < ApplicationController
-
-
   def index
     response = Movie.now_playing                                        #公開中の映画情報を取得
     @movies = Array.new                                                         #配列の初期化
@@ -11,8 +9,6 @@ class Public::MoviesController < ApplicationController
     end
     @genres = Genre.all
   end
-
-
 
   def show
     @movie = Movie.details(params[:id])
@@ -42,7 +38,6 @@ class Public::MoviesController < ApplicationController
       else
         redirect_to root_path
       end
-      # add_movies_to_db @movie_results
       @movie_results = Kaminari.paginate_array(@movie_results).page(params[:page]).per(20) unless @movie_results.blank?
     end
   end
@@ -64,5 +59,5 @@ class Public::MoviesController < ApplicationController
   end
   @movie_results = Kaminari.paginate_array(@movie_results).page(params[:page]).per(20) unless @movie_results.blank?
  end
-
+ 
 end

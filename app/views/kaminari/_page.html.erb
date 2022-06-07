@@ -1,9 +1,9 @@
 <% if page.current? %>
-  <%= link_to url, class: 'item active', title: page, remote: remote do %>
-    <%= page %>
-  <% end %>
+  <li class="page-item active">
+    <%= content_tag :a, page, data: { remote: remote }, rel: page.rel, class: 'page-link' %>
+  </li>
 <% else %>
-  <%= link_to url, class: 'item', title: page, remote: remote do %>
-    <%= page %>
-  <% end %>
+  <li class="page-item">
+    <%= link_to page, url, remote: remote, rel: page.rel, class: 'page-link' %>
+  </li>
 <% end %>

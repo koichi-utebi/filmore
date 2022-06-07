@@ -36,7 +36,7 @@ class Movie < ApplicationRecord
 
   def self.genre_list (id, page=1)
     base_uri 'https://api.themoviedb.org/3/discover/movie'
-    get("", query: { page: page, language: 'ja-JP', with_genres: id })
+    get("", query: { page: page, language: 'ja-JP', region: "JP", with_genres: id })
   end
 
   def self.year_list (year, page=1)
