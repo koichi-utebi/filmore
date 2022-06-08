@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
 
   has_many :watched_lists
+  has_many :posts
 
 
   include HTTParty

@@ -1,2 +1,48 @@
-<h1>Public::Posts#check</h1>
-<p>Find me in app/views/public/posts/check.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h4>レビューの確認</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <p>点数: <%= @post.rate %>点</p>
+      <div id="rate" class="form-group"></div>
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#rate').empty();
+        $('#rate').raty({
+          size: 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.rate %>,
+        });
+      });
+      </script>
+      <p>レビュータイトル</p>
+      <%= @post.review_title %>
+      <p>本文</p>
+      <%= safe_join(@post.review_body.split("\n"),tag(:br)) %>
+      <p>鑑賞日</p>
+      <%= @post.watched_data %>
+      <p>鑑賞方法</p>
+      <%= @post.way_to_watch %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+    <%= f.hidden_field :movie_id %>
+    <%= f.hidden_field :review_title %>
+    <%= f.hidden_field :review_body %>
+    <%= f.hidden_field :watched_data %>
+    <%= f.hidden_field :way_to_watch %>
+    <%= f.hidden_field :rate %>
+    <%= f.submit "公開する", class: 'btn btn-outline-primary' %>
+    <% end %>
+  </div>
+</div>

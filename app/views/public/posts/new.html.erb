@@ -1,2 +1,70 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-md-7">
+      <h4>レビューを書く</h4>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+      <%= form_with model: @post, url: check_post_path, method: :get do |f| %>
+      <div class="form-group" id="star" >
+        <%= f.label :rate, "点数" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          $('#star').empty();
+          $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            scoreName: 'post[rate]',
+            half: true,
+          });
+        })
+      </script>
+
+      <div class="form-group">
+        <%= f.label :review_title, "レビュータイトル" %><br/>
+        <%= f.text_field :review_title, class: "form-contol" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :review_body, "本文" %><br/>
+        <%= f.text_area :review_body, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :watched_data, "鑑賞日" %>
+        <%= f.date_select :watched_data, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :way_to_watch, "鑑賞方法" %><br/>
+
+        <%= f.radio_button :way_to_watch, "preview" %>
+        <%= f.label :way_to_watch, "試写会" %>
+
+        <%= f.radio_button :way_to_watch, "dvd_bd" %>
+        <%= f.label :way_to_watch, "DVD/BD" %>
+
+        <%= f.radio_button :way_to_watch, "terrestrial_tv" %>
+        <%= f.label :way_to_watch, "地上波TV" %>
+
+        <%= f.radio_button :way_to_watch, "cs_bs_cable" %>
+        <%= f.label :way_to_watch, "CS/BS/ケーブル" %>
+
+        <%= f.radio_button :way_to_watch, "vod" %>
+        <%= f.label :way_to_watch, "VOD" %>
+
+        <%= f.radio_button :way_to_watch, "theater" %>
+        <%= f.label :way_to_watch, "映画館" %>
+      </div>
+      <%= f.hidden_field :movie_id %>
+
+      <div class="form-group">
+        <%= f.submit "確認画面へ進む", class: "btn btn-outline-success" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

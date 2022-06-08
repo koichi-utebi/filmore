@@ -13,11 +13,11 @@ Rails.application.routes.draw do
     resources :movies, only: [:index, :show]                                    #映画関連
     get '/search' => 'movies#search', as: 'search'                              #映画タイトル検索
     get '/genre_search' => 'movies#genre_search', as: 'genre_search'            #ジャンル絞り込み
+    get '/posts/check' => 'posts#check', as: 'check_post'                         #新規投稿確認ページ
     resources :posts do                                                           #投稿関連
       resource :favorites, only: [:create, :destroy]                                #いいね関連
       resource :comments, only: [:create, :destroy]                                 #コメント関連
     end
-    get '/posts/check' => 'posts#check', as: 'check_post'                         #新規投稿確認ページ
     get '/favorites/index' => 'favorites#index', as: 'favorites'                  #いいねした投稿一覧ページ
     resources :watched_lists, only: [:index, :create, :destroy]                   #視聴済みリスト関連
     resources :wish_lists, only: [:index, :create, :destroy]                      #ウィッシュリスト関連

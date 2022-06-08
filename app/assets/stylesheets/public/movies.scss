@@ -17,3 +17,8 @@
 .show-poster-img {
   position: fixed;
 }
+
+.show-review-body {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

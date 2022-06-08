@@ -3,9 +3,28 @@
     <div class="col-md-4">
       <div class="show-poster-img">
         <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path'],class: "rounded mb-3", size: '300x450'%><br/>
-        <span>評価:</span> <%= image_tag 'sample-rate.png', size: '150x30'%>
+        <% if @posts.present? %>
+        <div class="d-inline-flex ml-5">
+          <div class="form-group" id="rate-avg"></div>
+          <h5 class=" ml-4 mt-1"><%= @posts.average(:rate) %>点</h5>
+        </div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            $('#rate-avg').empty();
+            $('#rate-avg').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= @posts.average(:rate) %>,
+            });
+          });
+          </script>
+        <% end %>
       </div>
-    </div>
+    </div><%#固定されたポスター画像%>
 
     <div class="col-md-8">
       <h4><%= @movie['title']%></h4>
@@ -35,17 +54,17 @@
 
       <div class="row">
         <div class="col-md-5">
-          <%= form_with model: @watched_lists, url: watched_lists_path, class: "mr-1", method: :post do |f| %>
+          <%= form_with model: @watched_lists, url: watched_lists_path, class: "ml-4", method: :post do |f| %>
             <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
             <%= f.hidden_field :customer_id, :value => current_customer.id %>
-            <%= f.submit '視聴済みリストに入れる', class: "btn btn-outline-secondary w-100" %>
+            <%= f.submit '視聴済みリストに入れる', class: "btn btn-outline-secondary btn-sm w-100" %>
           <% end %>
         </div>
         <div class="col-md-5">
-          <%= form_with model: @wish_lists, url: wish_lists_path, class: "ml-1", method: :post do |f| %>
+          <%= form_with model: @wish_lists, url: wish_lists_path, class: "mr-4", method: :post do |f| %>
             <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
             <%= f.hidden_field :customer_id, :value => current_customer.id %>
-            <%= f.submit 'ウィッシュリストに入れる', class: "btn btn-outline-success w-100" %>
+            <%= f.submit 'ウィッシュリストに入れる', class: "btn btn-outline-success btn-sm w-100 " %>
           <% end %>
         </div>
         <div class="col-md-1"></div>
@@ -53,14 +72,68 @@
 
       <div class="row mt-2">
         <div class="col-md-10" >
-          <%= link_to 'レビューを書く', new_post_path, class: "btn btn-primary w-100 text-center" %>
+          <%= form_with model: @post, url: new_post_path, method: :get do |f| %>
+            <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
+            <%= f.submit 'レビューを書く', class: "btn btn-primary w-100 text-center" %>
+          <% end %>
         </div>
       </div>
-      <div class="row mt-5 pb-5" style="height: 1000px">
-        <div class="col-md-12 border-bottom">
-          <h3 class="text-center">レビュー一覧</h3>
+
+      <% if @posts.present? %>
+        <div class="row mt-5">
+          <div class="col-md-12 border-bottom">
+            <h3 class="text-center">レビュー一覧<small>(全<%= @posts.count%>件)</small></h3>
+          </div>
         </div>
-      </div>
-    </div>
+        <% @posts.each do |post| %>
+        <div class="row mt-3">
+          <div class="col-md-1 mr-3">
+            <%= image_tag post.customer.get_profile_image, class: "rounded-circle", size:'60x60' %>
+          </div>
+          <div class="col-md-10 pt-2">
+            <p>
+              <%= link_to post_path(post) do %>
+                <%= post.review_title %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 offset-md-1 d-inline-flex ">
+            <div id="rate-<%= post.id %>" class="form-group"></div><p class="mt-1 ml-1"><%= post.rate %>点</p>
+            <div class="ml-4">
+              <p class="text-muted mt-1"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch %></p>
+            </div>
+            <script>
+            $(document).on('turbolinks:load', function() {
+              $('#rate-<%= post.id %>').empty();
+              $('#rate-<%= post.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: <%= post.rate %>,
+              });
+            });
+            </script>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3 border-bottom">
+          <div class="col-md-12 show-review-body pd-1">
+            <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
+          </div>
+        </div>
+        <% end %>
+      <% else %>
+        <div class="row mt-5">
+          <div class="col-md-12">
+            <h4 class="text-center">まだレビューは投稿されていません</h4>
+          </div>
+        </div>
+      <% end %>
+    </div><%#映画情報、レビューなどのメインコンテンツ %>
+    
   </div>
 </div>

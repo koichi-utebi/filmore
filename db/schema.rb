@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_093925) do
+ActiveRecord::Schema.define(version: 2022_06_08_052032) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -104,14 +104,12 @@ ActiveRecord::Schema.define(version: 2022_06_07_093925) do
     t.string "review_title"
     t.text "review_body"
     t.float "rate"
-    t.integer "watched_year"
-    t.integer "watched_month"
-    t.integer "watched_day"
     t.integer "way_to_watch", default: 0
     t.boolean "spoiler", default: false
     t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "watched_data"
   end
 
   create_table "relationships", force: :cascade do |t|
