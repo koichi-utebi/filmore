@@ -1,68 +1,81 @@
 <div class="container">
   <div class="row pt-5">
-    <div class="col-md-7">
-      <h4>レビューを書く</h4>
+    <div class="col-md-8 offset-md-2">
+      <h3>レビューを書く</h3>
     </div>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-md-8 offset-md-2">
+  <div class="row mt-3 mb-5">
+    <div class="col-md-8 offset-md-2 border">
       <%= form_with model: @post, url: check_post_path, method: :get do |f| %>
-      <div class="form-group" id="star" >
-        <%= f.label :rate, "点数" %>
-        <%= f.hidden_field :rate, id: :review_star %>
+      <div class="form-group d-inline-flex mt-4">
+        <div class="mr-3"><h5>採点 :</h5></div>
+        <div id="star" >
+          <%= f.hidden_field :rate, id: :review_star %>
+        </div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            $('#star').empty();
+            $('#star').raty({
+              size     : 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              scoreName: 'post[rate]',
+              half: true,
+            });
+          })
+        </script>
+      </div>
+
+      <div class="form-group border-top pt-3">
+        <%= f.text_field :review_title, class: "w-100", id: "textfield", placeholder: "レビュータイトル" %>
+      </div>
+      <div class="form-group border-top border-bottom">
+        <%= f.text_area :review_body, class: "w-100", id: "textarea", placeholder: "本文" %>
       </div>
       <script>
-        $(document).on('turbolinks:load', function() {
-          $('#star').empty();
-          $('#star').raty({
-            size     : 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            scoreName: 'post[rate]',
-            half: true,
+        $(function(){
+          $('#textarea')
+          .on('input', function(){
+            if ($(this).outerHeight() > this.scrollHeight){
+              $(this).height(1)
+            }
+            while ($(this).outerHeight() < this.scrollHeight){
+              $(this).height($(this).height() + 1)
+            }
           });
-        })
+        });
       </script>
-
-      <div class="form-group">
-        <%= f.label :review_title, "レビュータイトル" %><br/>
-        <%= f.text_field :review_title, class: "form-contol" %>
+      <div class="form-group pt-2">
+        <h5><%= f.label :watched_data, "鑑賞日" %></h5>
+        <%= f.date_select :watched_data, {use_month_numbers: true, start_year: 2000, end_year: (Time.now.year), date_separator: '/ ', prompt: "--"}, {class: "new-watched-data-box"} %>
       </div>
-      <div class="form-group">
-        <%= f.label :review_body, "本文" %><br/>
-        <%= f.text_area :review_body, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :watched_data, "鑑賞日" %>
-        <%= f.date_select :watched_data, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :way_to_watch, "鑑賞方法" %><br/>
+      <div class="form-group pt-2">
+        <h5><%= f.label :way_to_watch, "鑑賞方法" %></h5>
 
         <%= f.radio_button :way_to_watch, "preview" %>
         <%= f.label :way_to_watch, "試写会" %>
 
-        <%= f.radio_button :way_to_watch, "dvd_bd" %>
+        <%= f.radio_button :way_to_watch, "dvd_bd", class: "ml-2" %>
         <%= f.label :way_to_watch, "DVD/BD" %>
 
-        <%= f.radio_button :way_to_watch, "terrestrial_tv" %>
+        <%= f.radio_button :way_to_watch, "terrestrial_tv", class: "ml-2" %>
         <%= f.label :way_to_watch, "地上波TV" %>
 
-        <%= f.radio_button :way_to_watch, "cs_bs_cable" %>
+        <%= f.radio_button :way_to_watch, "cs_bs_cable", class: "ml-2" %>
         <%= f.label :way_to_watch, "CS/BS/ケーブル" %>
 
-        <%= f.radio_button :way_to_watch, "vod" %>
+        <%= f.radio_button :way_to_watch, "vod", class: "ml-2" %>
         <%= f.label :way_to_watch, "VOD" %>
 
-        <%= f.radio_button :way_to_watch, "theater" %>
+        <%= f.radio_button :way_to_watch, "theater", class: "ml-2" %>
         <%= f.label :way_to_watch, "映画館" %>
       </div>
       <%= f.hidden_field :movie_id %>
 
-      <div class="form-group">
-        <%= f.submit "確認画面へ進む", class: "btn btn-outline-success" %>
+      <div class="col-md-4 offset-md-4 form-group">
+        <%= f.submit "確認画面へ進む", class: "btn btn-outline-success w-100" %>
       </div>
       <% end %>
     </div>

@@ -25,13 +25,28 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    if @post.customer_id == current_customer.id
+      render :edit
+    else
+      redirect_to root_path
+    end
   end
 
 
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
-  def delete
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to movies_path
   end
 
   private

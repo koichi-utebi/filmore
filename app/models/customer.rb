@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts
+  has_one :watched_list
   has_one_attached :profile_image
 
 

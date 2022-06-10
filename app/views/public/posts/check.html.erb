@@ -1,48 +1,59 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-7">
-      <h4>レビューの確認</h4>
-    </div>
-  </div>
-
-  <div class="row">
+  <div class="row pt-5">
     <div class="col-md-8 offset-md-2">
-      <p>点数: <%= @post.rate %>点</p>
-      <div id="rate" class="form-group"></div>
-      <script>
-      $(document).on('turbolinks:load', function() {
-        $('#rate').empty();
-        $('#rate').raty({
-          size: 36,
-          starOff:  '<%= asset_path('star-off.png') %>',
-          starOn : '<%= asset_path('star-on.png') %>',
-          starHalf: '<%= asset_path('star-half.png') %>',
-          half: true,
-          readOnly: true,
-          score: <%= @post.rate %>,
-        });
-      });
-      </script>
-      <p>レビュータイトル</p>
-      <%= @post.review_title %>
-      <p>本文</p>
-      <%= safe_join(@post.review_body.split("\n"),tag(:br)) %>
-      <p>鑑賞日</p>
-      <%= @post.watched_data %>
-      <p>鑑賞方法</p>
-      <%= @post.way_to_watch %>
+      <h3>レビューの確認</h3>
     </div>
   </div>
 
-  <div class="row">
-    <%= form_with model: @post, url: posts_path, method: :post do |f| %>
-    <%= f.hidden_field :movie_id %>
-    <%= f.hidden_field :review_title %>
-    <%= f.hidden_field :review_body %>
-    <%= f.hidden_field :watched_data %>
-    <%= f.hidden_field :way_to_watch %>
-    <%= f.hidden_field :rate %>
-    <%= f.submit "公開する", class: 'btn btn-outline-primary' %>
-    <% end %>
+  <div class="row mt-3">
+    <div class="col-md-8 offset-md-2 border">
+      <div class="d-inline-flex mt-4">
+        <h5 class="pt-1 mr-2">採点:</h5>
+        <div id="rate" class="form-group"></div>
+        <h5 class="pt-1 ml-2"><%= @post.rate %>点</h5>
+        <script>
+        $(document).on('turbolinks:load', function() {
+          $('#rate').empty();
+          $('#rate').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= @post.rate %>,
+          });
+        });
+        </script>
+      </div>
+      <div class="border-top pt-3 pb-2">
+        <h5><%= @post.review_title %></h5>
+      </div>
+      <div class="border-top border-bottom">
+        <p><%= safe_join(@post.review_body.split("\n"),tag(:br)) %></p>
+      </div>
+      <div class="pt-2">
+        <h5>鑑賞日</h5>
+        <p><%= @post.watched_data.strftime('%Y年%m月%d日') %></p>
+      </div>
+      <div class="pt-2">
+        <h5>鑑賞方法</h5>
+        <p><%= @post.way_to_watch %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5 mt-3">
+    <div class="col-md-4 offset-md-4">
+      <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+        <%= f.hidden_field :movie_id %>
+        <%= f.hidden_field :review_title %>
+        <%= f.hidden_field :review_body %>
+        <%= f.hidden_field :watched_data %>
+        <%= f.hidden_field :way_to_watch %>
+        <%= f.hidden_field :rate %>
+        <%= f.submit "公開する", class: 'btn btn-outline-primary w-100' %>
+      <% end %>
+    </div>
   </div>
 </div>

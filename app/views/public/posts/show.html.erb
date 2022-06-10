@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-md-8 pt-5 offset-md-2 border-left border-right">
       <h4 class="border-bottom"><%= @post.customer.name %>さんのレビュー</h4>
-
       <div class="row">
         <div class="col-md-2 mt-2">
           <%= image_tag @post.customer.get_profile_image, class: "rounded-circle", size: '80x80' %>
@@ -46,6 +45,15 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-11 pb-3">
+          <div class="float-right">
+            <%= link_to "編集", edit_post_path, class: "text-success" %> |
+            <%= link_to "削除", post_path, method: :delete, class: "text-danger" %>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
