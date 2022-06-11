@@ -53,26 +53,25 @@
       </p>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 pl-5">
           <% if WatchedList.exists?(movie_id: @movie['id']) %>
-            <%= link_to "視聴済みリストからはずす", watched_list_path(@movie['id']), method: :delete, class: "btn btn-outline-danger" %>
+            <%= link_to "視聴済みリストからはずす", watched_list_path(@movie['id']), method: :delete, class: "btn btn-outline-danger btn-sm w-100" %>
           <% else %>
-            <%= form_with model: @watched_list, url: watched_lists_path, class: "ml-4", method: :post do |f| %>
-              <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
+            <%= form_with model: @watched_list, url: watched_lists_path, method: :post do |f| %>
+              <%= f.hidden_field :movie_id, :value => @movie['id'] %>
               <%= f.hidden_field :poster_path, :value => @movie['poster_path'] %>
               <%= f.hidden_field :title, :value => @movie['title'] %>
               <%= f.submit '視聴済みリストに入れる', class: "btn btn-outline-secondary btn-sm w-100" %>
             <% end %>
           <% end %>
         </div>
-        <div class="col-md-5">
-          <%= form_with model: @wish_list, url: wish_lists_path, class: "mr-4", method: :post do |f| %>
+        <div class="col-md-5 pr-5">
+          <%= form_with model: @wish_list, url: wish_lists_path, method: :post do |f| %>
             <%= f.hidden_field :movie_id, :value => @movie['id'].to_i %>
             <%= f.hidden_field :customer_id, :value => current_customer.id %>
             <%= f.submit 'ウィッシュリストに入れる', class: "btn btn-outline-success btn-sm w-100 " %>
           <% end %>
         </div>
-        <div class="col-md-1"></div>
       </div>
 
       <div class="row mt-2">

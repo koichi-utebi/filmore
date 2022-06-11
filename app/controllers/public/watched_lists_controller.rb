@@ -4,7 +4,8 @@ class Public::WatchedListsController < ApplicationController
   end
 
   def create
-    @watched_list = WatchedList.new
+    @watched_list = WatchedList.new(watched_list_params)
+    @watched_list.customer_id = current_customer.id
     if @watched_list.save
       redirect_to request.referer
     else
@@ -13,6 +14,9 @@ class Public::WatchedListsController < ApplicationController
   end
 
   def destroy
+    @watched_list = WatchedList.find_by(movie_id: params[:id])
+    @watched_list.destroy
+    redirect_to request.referer
   end
 
   private
