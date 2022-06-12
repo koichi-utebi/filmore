@@ -19,7 +19,7 @@ class Public::PostsController < ApplicationController
         render 'new'
       end
     else
-      redirect_to new_customer_registration_path
+      redirect_to new_customer_session_path
     end
   end
 
