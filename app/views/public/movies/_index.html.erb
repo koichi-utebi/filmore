@@ -1,0 +1,22 @@
+<% movies.each do |movie| %>
+<div class="row mt-3 pb-3 border-bottom index-content-area">
+  <div class="col-md-3">
+    <%= link_to movie_path(movie['id']) do %>
+      <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '200x300'%>
+    <% end %>
+  </div>
+  <div class="col-md-9">
+    <h5><%= link_to movie['title'], movie_path("#{movie['id']}") %></h5>
+    <p><%= movie['release_date'] %></p>
+    <% if movie['overview'].present? %>
+      <% if movie['overview'].length >= 290 %>
+        <p><%= movie['overview'].slice(0,290) %> ...<%= link_to '>>続きを読む', movie_path("#{movie['id']}") %></p>
+      <% else %>
+        <p><%= movie['overview'] %></p>
+      <% end %>
+    <% else %>
+     <p class="text-danger"><表示できるあらずじ情報がありません></p>
+    <% end %>
+  </div>
+</div>
+<% end %>

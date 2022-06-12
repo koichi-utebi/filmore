@@ -1,15 +1,15 @@
 class Public::WishListsController < ApplicationController
-  def index
-    @wish_lists = current_customer.wish_lists.latest
-  end
-
   def create
-    @wish_list = WishList.new(wish_list_params)
-    @wish_list.customer_id = current_customer.id
-    if @wish_list.save
-      redirect_to request.referer
+    if customer_signed_in?
+      @wish_list = WishList.new(wish_list_params)
+      @wish_list.customer_id = current_customer.id
+      if @wish_list.save
+        redirect_to request.referer
+      else
+        redirect_to request.referer
+      end
     else
-      redirect_to request.referer
+      redirect_to new_customer_session_path
     end
   end
 

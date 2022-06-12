@@ -1,0 +1,18 @@
+<div class="col-md-3">
+  <% if WishList.exists?(movie_id: movie['id'], customer_id: current_customer.id) %>
+    <%= link_to wish_list_path(movie['id']), method: :delete, class: "" do %>
+      <i class="fas fa-tasks fa-2x"></i>
+    <% end %>
+    <span class="text-muted pl-1">(リスト登録済)</span>
+  <% else %>
+    <%= form_with model: wish_list, url: wish_lists_path, method: :post do |f| %>
+      <%= f.hidden_field :movie_id, :value => movie['id'] %>
+      <%= f.hidden_field :poster_path, :value => movie['poster_path'] %>
+      <%= f.hidden_field :title, :value => movie['title'] %>
+      <%= f.button :type => "submit", style: "border-style: none; background: transparent;" do %>
+        <i class="fas fa-list-ul fa-2x"></i>
+      <% end %>
+      <span class="text-muted pl-1">(リスト未登録)</span>
+    <% end %>
+  <% end %>
+</div>

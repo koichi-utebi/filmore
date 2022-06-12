@@ -21,7 +21,7 @@
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               <%= @customer.name %>さんの投稿<small>(全<%= @posts.count %>件)</small>
             </h3>
-            <%= render 'post', customer: @customer, posts: @posts %>
+            <%= render 'public/posts/index', customer: @customer, posts: @posts %>
           <% else %>
           <h3 class="border-bottom pt-3 pb-3 pl-4">
             投稿したレビューがありません
@@ -34,7 +34,7 @@
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               <%= @customer.name %>さんがいいねした投稿<small>(全<%= @favorite_posts.count %>件)</small>
             </h3>
-            <%= render 'post', customer: @customer, posts: @favorite_posts %>
+            <%= render 'public/posts/index', customer: @customer, posts: @favorite_posts %>
           <% else %>
           <h3 class="border-bottom pt-3 pb-3 pl-4">
             いいねしたレビューがありません

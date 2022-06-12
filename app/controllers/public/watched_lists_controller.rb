@@ -1,16 +1,15 @@
 class Public::WatchedListsController < ApplicationController
-  def index
-    @customer = Customer.find(params[:id])
-    @watched_lists = @customer.watched_lists.latest
-  end
-
   def create
-    @watched_list = WatchedList.new(watched_list_params)
-    @watched_list.customer_id = current_customer.id
-    if @watched_list.save
-      redirect_to request.referer
+    if customer_signed_in?
+      @watched_list = WatchedList.new(watched_list_params)
+      @watched_list.customer_id = current_customer.id
+      if @watched_list.save
+        redirect_to request.referer
+      else
+        redirect_to request.referer
+      end
     else
-      redirect_to request.referer
+      redirect_to new_customer_session_path
     end
   end
 

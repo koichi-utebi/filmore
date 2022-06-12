@@ -17,8 +17,8 @@ Rails.application.routes.draw do
       resource :comments, only: [:create, :destroy]                                 #コメント関連
     end
     get '/favorites/index' => 'favorites#index', as: 'favorites'                  #いいねした投稿一覧ページ
-    resources :watched_lists, only: [:create, :destroy]                   #視聴済みリスト関連
-    resources :wish_lists, only: [:create, :destroy]                      #ウィッシュリスト関連
+    resources :watched_lists, only: [:create, :destroy]                         #視聴済みリスト関連
+    resources :wish_lists, only: [:create, :destroy]                            #ウィッシュリスト関連
   end
 
   namespace :admin do                                                           #管理者側ルーティング

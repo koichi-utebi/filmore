@@ -1,2 +1,8 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div clas="col-md-9 offset-md-2">
+      <h3 class="text-center border-bottom pt-3 mb-3">最新の投稿</h3>
+      <%= render 'public/posts/index', customer: @customer, posts: @posts %>
+    </div>
+  </div>
+</div>

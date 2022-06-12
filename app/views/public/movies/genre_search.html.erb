@@ -6,28 +6,7 @@
         <h2 class="text-center">[<%= @search_term %>]と一致する情報が見つかりませんでした</h2>
       <% else %>
         <h2 class="text-center">[<%= @genre.name %>]の検索結果</h2>
-        <% @movie_results.each do |movie| %>
-        <div class="row mt-3 pb-3 border-bottom">
-          <div class="col-md-3">
-            <%= link_to movie_path(movie['id']) do %>
-              <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '200x300'%>
-            <% end %>
-          </div>
-          <div class="col-md-9">
-            <h4><%= link_to movie['title'], movie_path("#{movie['id']}") %></h4>
-            <p><%= movie['release_date'] %></p>
-            <% if movie['overview'].present? %>
-              <% if movie['overview'].length >= 290 %>
-                <p><%= movie['overview'].slice(0,290) %> ...<%= link_to '>>続きを読む', movie_path("#{movie['id']}") %></p>
-              <% else %>
-                <p><%= movie['overview'] %></p>
-              <% end %>
-            <% else %>
-           <p class="text-danger"><表示できるあらずじ情報がありません></p>
-          <% end %>
-          </div>
-        </div>
-        <% end %>
+        <%= render 'public/movies/index', movies: @movie_results %>
       <% end %>
     </div>
     <div class="mx-auto mt-3">

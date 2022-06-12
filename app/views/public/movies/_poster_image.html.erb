@@ -1,0 +1,23 @@
+<div class="show-poster-img">
+  <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'],class: "rounded mb-3", size: '300x450'%><br/>
+  <% if posts.present? %>
+  <div class="d-inline-flex ml-5">
+    <div class="form-group" id="rate-avg"></div>
+    <h5 class=" ml-4 mt-1"><%= posts.average(:rate) %>点</h5>
+  </div>
+  <script>
+    $(document).on('turbolinks:load', function() {
+      $('#rate-avg').empty();
+      $('#rate-avg').raty({
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half: true,
+        readOnly: true,
+        score: <%= posts.average(:rate) %>,
+      });
+    });
+    </script>
+  <% end %>
+</div>

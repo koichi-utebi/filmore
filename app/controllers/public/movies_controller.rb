@@ -12,11 +12,13 @@ class Public::MoviesController < ApplicationController
 
   def show
     @movie = Movie.details(params[:id])
-    @post = Post.new
     @posts = Post.where(movie_id: @movie['id']).latest.page(params[:page]).per(10)
+    @post = Post.new
     @watched_list = WatchedList.new
     @wish_list = WishList.new
-    @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @movie['id'])
+    if customer_signed_in?
+      @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @movie['id'])
+    end
   end
 
   def search

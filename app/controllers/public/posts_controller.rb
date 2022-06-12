@@ -1,5 +1,7 @@
 class Public::PostsController < ApplicationController
   def index
+    @posts = Post.latest.page(params[:page]).per(10)
+    @customer = current_customer
   end
 
   def show
@@ -8,12 +10,16 @@ class Public::PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new(post_params)
-    @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @post.movie_id)
-    if @current_customer_post.present?
-      redirect_to movies_path
+    if customer_signed_in?
+      @post = Post.new(post_params)
+      @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @post.movie_id)
+      if @current_customer_post.present?
+        redirect_to movies_path
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      redirect_to new_customer_registration_path
     end
   end
 

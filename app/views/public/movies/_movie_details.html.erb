@@ -1,0 +1,24 @@
+<h4><%= movie['title']%></h4>
+<% movie["genres"].each do |genre| %>
+  <% if genre == movie["genres"].last %>
+    <span><%= genre["name"] %></span>
+  <% else %>
+    <span><%= genre["name"] %>、</span>
+  <% end %>
+<% end %>
+<h5 class="pt-3">解説</h5>
+<% if movie['overview'].present? %>
+  <p><%= movie['overview'] %></p>
+<% else %>
+  <p class="text-danger"><表示できる情報がありません></p>
+<% end %>
+<p>
+  <% unless movie["runtime"] == 0 %>
+    上映時間: <%= movie["runtime"] %>分
+  <% end %>
+</p>
+<p>
+  <% unless movie['release_date'].blank? %>
+    公開日:　 <%= movie['release_date'] %>
+  <% end %>
+</p>

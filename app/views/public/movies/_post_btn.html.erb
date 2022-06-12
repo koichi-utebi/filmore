@@ -1,0 +1,19 @@
+<div class="row mt-3">
+  <div class="col-md-10 text-center" >
+    <% if post.present? %>
+      <p class="m-0 text-success text-left pl-5 ml-5">※既にレビューを投稿済みです</p>
+      <%= link_to edit_post_path(post.id), class: "btn btn-outline-success w-75 text-center" do %>
+        <i class="fas fa-edit"></i>レビューを編集
+      <% end %>
+    <% else %>
+      <%= form_with model: post, url: new_post_path, method: :get do |f| %>
+        <%= f.hidden_field :movie_id, :value => movie['id'].to_i %>
+        <%= f.hidden_field :title, :value => movie['title'] %>
+        <%= f.hidden_field :poster_path, :value => movie['poster_path'] %>
+        <%= f.button :type => "submit", class: "btn btn-outline-primary w-75 text-center" do %>
+          <i class="fas fa-pen"></i>レビューを書く
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

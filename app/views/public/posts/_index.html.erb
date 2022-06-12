@@ -61,6 +61,11 @@
               <% end %>
               <span>(いいね!した人<%= post.favorites.count %>人)</span>
             <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(post), method: :post do %>
+              <i class="far fa-thumbs-up"></i>いいね！
+            <% end %>
+            <span>(いいね!した人<%= post.favorites.count %>人)</span>
           <% end %>
           </div>
         </div>

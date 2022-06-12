@@ -13,17 +13,13 @@
   </div>
 
   <div class="row">
-    <% i = 0 %>
-    <% while i < 8 %>
-      <div class="col-md-3 pt-5">
-        <% if @movies['table']['results'][i]['table']['poster_path'].present? %>
-          <%= link_to movie_path(@movies['table']['results'][i]['table']['id']) do %>
-            <%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movies['table']['results'][i]['table']['poster_path'],class: "rounded", size: '200x300'%>
-          <% end %>
-        <%end%>
-      </div>
-      <% i += 1%>
-    <%end%>
+    <% @movies.each do |movie| %>
+    <div class="col-md-3 mt-3">
+      <%= link_to movie_path(movie['id']) do %>
+        <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '260x390'%>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 
   <div class="row">

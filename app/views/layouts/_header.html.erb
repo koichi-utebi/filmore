@@ -34,24 +34,28 @@
         <div class="d-flex flex-column ml-auto">
           <ul class="navbar-nav d-flex align-items-center">
             <li class="header-icons">
-              <h2>
-                <%= link_to movies_path, class: "nav-link pt-3" do %>
-                  <i class="fas fa-film"></i>
-                <% end %>
-              </h2>
+              <%= link_to posts_path, class: "nav-link pt-3" do %>
+                <i class="fas fa-book-open fa-2x"></i>
+              <% end %>
             </li>
-            <li class="header-text">
-              映画一覧を見る
+            <li class="header-text text-center">
+              レビュー一覧
             </li>
             <li class="header-icons">
-              <h2>
-                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link pt-3" do %>
-                  <i class="fas fa-sign-out-alt"></i>
-                <% end %>
-              </h2>
+              <%= link_to movies_path, class: "nav-link pt-3" do %>
+                <i class="fas fa-film fa-2x"></i>
+              <% end %>
             </li>
-            <li class="header-text">
-              ログアウトする
+            <li class="header-text text-center">
+              映画一覧
+            </li>
+            <li class="header-icons">
+              <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link pt-3" do %>
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="header-text text-center">
+              ログアウト
             </li>
             <li class="header-icons">
               <%= link_to customer_path(current_customer), class: "ml-2 " do %>
@@ -67,31 +71,41 @@
         <div class="d-flex flex-column ml-auto">
           <ul class="navbar-nav">
             <li class="header-icons">
-              <h3>
-                <%= link_to about_path, class: "nav-link pt-3 pl-2" do %>
-                  <i class="fas fa-book"></i>
-                <% end %>
-              </h3>
+              <%= link_to about_path, class: "nav-link pl-2" do %>
+                <i class="fas fa-book fa-2x"></i>
+              <% end %>
             </li>
             <li class="header-text text-center">
               FILMOREとは
             </li>
             <li class="header-icons">
-              <h3>
-                <%= link_to new_customer_registration_path, class: "nav-link pt-3 pl-2" do %>
-                  <i class="fas fa-user-plus"></i>
-                <% end %>
-              </h3>
+              <%= link_to posts_path, class: "nav-link pl-2" do %>
+                <i class="fas fa-book-open fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="header-text text-center">
+              レビュー一覧
+            </li>
+            <li class="header-icons">
+              <%= link_to movies_path, class: "nav-link pl-2" do %>
+                <i class="fas fa-film fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="header-text text-center">
+              映画一覧
+            </li>
+            <li class="header-icons">
+              <%= link_to new_customer_registration_path, class: "nav-link pl-2" do %>
+                <i class="fas fa-user-plus fa-2x"></i>
+              <% end %>
             </li>
             <li class="header-text text-center">
               新規登録
             </li>
             <li class="header-icons">
-              <h3>
-                <%= link_to new_customer_session_path, class: "nav-link pt-3 pl-2" do %>
-                  <i class="fas fa-sign-in-alt"></i>
-                <% end %>
-              </h3>
+              <%= link_to new_customer_session_path, class: "nav-link pl-2" do %>
+                <i class="fas fa-sign-in-alt fa-2x"></i>
+              <% end %>
             </li>
             <li class="header-text text-center">
               ログイン
