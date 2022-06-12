@@ -1,6 +1,7 @@
 class Public::WatchedListsController < ApplicationController
   def index
-    @watched_lists = WatchedList.latest
+    @customer = Customer.find(params[:id])
+    @watched_lists = @customer.watched_lists.latest
   end
 
   def create

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-md-8 offset-md-2">
-      <h3>レビューを書く</h3>
+      <h3>"<%= @post.title %>"のレビューを書く</h3>
     </div>
   </div>
 
@@ -73,6 +73,8 @@
         <%= f.label :way_to_watch, "映画館" %>
       </div>
       <%= f.hidden_field :movie_id %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :poster_path %>
 
       <div class="col-md-4 offset-md-4 form-group">
         <%= f.submit "確認画面へ進む", class: "btn btn-outline-success w-100" %>

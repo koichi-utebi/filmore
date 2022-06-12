@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header-icons {
+  position: relative;
+}
+
+.header-text {
+  display: none;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 60%;
+  padding: 16px;
+  border-radius: 5px;
+  background: rgba(136, 136, 136, 0.75);
+  font-weight: bold;
+  color: white;
+  z-index: 10;
+}
+.header-text:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50px;
+  top: -10px;
+  margin-left: 10px;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}
+.header-icons:hover + .header-text {
+  display: block;
+}

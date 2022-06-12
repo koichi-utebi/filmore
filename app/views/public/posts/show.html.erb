@@ -4,7 +4,9 @@
       <h4 class="border-bottom"><%= @post.customer.name %>さんのレビュー</h4>
       <div class="row">
         <div class="col-md-2 mt-2">
+          <%= link_to customer_path(@customer.id) do %>
           <%= image_tag @post.customer.get_profile_image, class: "rounded-circle", size: '80x80' %>
+          <% end %>
         </div>
         <div class="col-md-10 mt-2">
           <h5 class="text-primary"><%= @post.review_title %></h5>
@@ -45,15 +47,35 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-11 pb-3">
+      <div class="row pb-5">
+        <div class="col-md-6 offset-md-2">
+          <% if @post.favorited_by?(current_customer) %>
+            <%= link_to post_favorites_path(@post), method: :delete do %>
+              <i class="fas fa-thumbs-up"></i>いいね済
+            <% end %>
+            <span>(いいねした人<%= @post.favorites.count %>人)</span>
+          <% else %>
+            <%= link_to post_favorites_path(@post), method: :post do %>
+              <i class="far fa-thumbs-up"></i>いいね!
+            <% end %>
+            <span>(いいねした人<%= @post.favorites.count %>人)</span>
+          <% end %>
+        </div>
+        <% if @customer == current_customer %>
+        <div class="col-md-3 offset-md-1 pb-3">
           <div class="float-right">
-            <%= link_to "編集", edit_post_path, class: "text-success" %> |
-            <%= link_to "削除", post_path, method: :delete, class: "text-danger" %>
+            <%= link_to edit_post_path, class: "text-success" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+            |
+            <%= link_to post_path, method: :delete, class: "text-danger" do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
           </div>
         </div>
+        <% end %>
       </div>
-      
+
     </div>
   </div>
 </div>

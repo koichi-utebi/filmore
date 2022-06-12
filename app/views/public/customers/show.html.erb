@@ -1,77 +1,111 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-    <% if @customer.id == current_customer.id %>
-      <div class="show-side-bar">
-        <div class="pt-3 mb-3 text-center">
-          <%= image_tag @customer.get_profile_image, class: "rounded-circle", size: "150x150" %>
-        </div>
-        <div class="mt-3 mb-3 text-center">
-          <h5><%= @customer.name %></h5>
-        </div>
-        <div class="text-center">
-          <%= link_to "プロフィール編集", edit_customer_path, class: "btn btn-outline-success w-75" %>
-        </div>
-        <div>
-          <p class="text-center">
-            <%= link_to ">視聴済みリスト", watched_lists_path %>
-          </p>
-        </div>
-      </div>
-    <% else %>
-      <div class="show-side-bar">
-        <div class="pt-3 mb-3 text-center">
-          <%= image_tag @customer.get_profile_image, class: "rounded-circle", size: "150x150" %>
-        </div>
-        <div class="mt-3 mb-3 text-center">
-          <h5><%= @customer.name %></h5>
-        </div>
-      </div>
-    <% end %>
 
+    <div class="col-md-3 p-0">
+      <%= render 'side_bar', customer: @customer %>
     </div>
 
-    <div class="col-md-9">
-      <h3 class="border-bottom pt-3 pb-3 pl-4"><%= @customer.name %>さんの投稿<small>(全<%= @posts.count %>件)</small></h3>
-      <div class="row">
-        <div class="col-md-10 offset-md-1">
-          <div class="mt-2 mb-5">
-            <% @posts.each do |post| %>
-              <div class="mt-3">
-                <h5>
-                  <%= link_to post_path(post) do %>
-                    <%= post.review_title %>
-                  <% end %>
-                </h5>
-              </div>
-              <div class="d-inline-flex">
-                <div id="rate-<%= post.id %>" class="form-group"></div><p class="mt-1 ml-1"><%= post.rate %>点</p>
-                <div class="ml-4">
-                  <p class="text-muted mt-1"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch %></p>
-                </div>
-                <script>
-                $(document).on('turbolinks:load', function() {
-                  $('#rate-<%= post.id %>').empty();
-                  $('#rate-<%= post.id %>').raty({
-                    size: 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    half: true,
-                    readOnly: true,
-                    score: <%= post.rate %>,
-                  });
-                });
-                </script>
-              </div>
-              <div class="mt-2 border-bottom">
-                <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+    <div class="col-md-9 show-contents pt-2">
+      <ul id="tab-menu">
+        <li><a href="#tab1" class="active">過去の投稿</a></li>
+        <li><a href="#tab2" class="">いいねした投稿</a></li>
+        <li><a href="#tab3" class="">フォロー中</a></li>
+        <li><a href="#tab4" class="">フォロワー</a></li>
+        <li><a href="#tab5" class="">視聴済みリスト</a></li>
+        <li><a href="#tab6" class="">ウィッシュリスト</a></li>
+      </ul>
+      <div id="tab-contents">
 
+        <div id="tab1" class="tab">
+          <% if @posts.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              <%= @customer.name %>さんの投稿<small>(全<%= @posts.count %>件)</small>
+            </h3>
+            <%= render 'post', customer: @customer, posts: @posts %>
+          <% else %>
+          <h3 class="border-bottom pt-3 pb-3 pl-4">
+            投稿したレビューがありません
+          </h3>
+          <% end %>
+        </div>
+
+        <div id="tab2" class="tab">
+          <% if @favorite_posts.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              <%= @customer.name %>さんがいいねした投稿<small>(全<%= @favorite_posts.count %>件)</small>
+            </h3>
+            <%= render 'post', customer: @customer, posts: @favorite_posts %>
+          <% else %>
+          <h3 class="border-bottom pt-3 pb-3 pl-4">
+            いいねしたレビューがありません
+          </h3>
+          <% end %>
+        </div>
+
+        <div id="tab3" class="tab">
+          <% if @customer_followings.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォロー中: <%= @customer_followings.count %>
+            </h3>
+            <%= render 'public/relationships/index', customer: @customer_followings %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォローしているアカウントがありません
+            </h3>
+          <% end %>
+        </div>
+
+        <div id="tab4" class="tab">
+          <% if @customer_followers.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォロワー数: <%= @customer_followers.count %>
+            </h3>
+            <%= render 'public/relationships/index', customer: @customer_followers %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォローされているアカウンがありません
+            </h3>
+          <% end %>
+        </div>
+
+        <div id="tab5" class="tab">
+          <% if @watched_lists.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              視聴済みリスト<small>(全<%=@watched_lists.count%>件)</small>
+            </h3>
+            <%= render 'public/watched_lists/index', lists: @watched_lists %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              リストに映画がありません
+            </h3>
+          <% end %>
+        </div>
+
+        <div id="tab6" class="tab">
+          <% if @wish_lists.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              ウィッシュリスト<small>(全<%= @wish_lists.count %>件)</small>
+            </h3>
+            <%= render 'public/watched_lists/index', lists: @wish_lists %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              リストに映画がありません
+            </h3>
+          <% end %>
+        </div>
+
+      </div>
     </div>
+    <script>
+    $('#tab-contents .tab[id != "tab1"]').hide();
+
+    $('#tab-menu a').on('click', function(event) {
+      $("#tab-contents .tab").hide();
+      $("#tab-menu .active").removeClass("active");
+      $(this).addClass("active");
+      $($(this).attr("href")).show();
+      event.preventDefault();
+    });
+    </script>
   </div>
 </div>

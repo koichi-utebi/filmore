@@ -1,0 +1,18 @@
+<div>
+  <% if customer.exists? %>
+    <% customer.each do |customer| %>
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to customer_path(customer.id) do %>
+            <%= image_tag customer.get_profile_image, class: "rounded-circle",size: '100x100' %>
+          <% end %>
+        </td>
+        <td><%= customer.name %></td>
+      </tr>
+    </tbody>
+    <% end %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+</div>

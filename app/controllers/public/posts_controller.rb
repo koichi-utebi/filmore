@@ -4,10 +4,17 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @customer = @post.customer
   end
 
   def new
     @post = Post.new(post_params)
+    @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @post.movie_id)
+    if @current_customer_post.present?
+      redirect_to movies_path
+    else
+      render 'new'
+    end
   end
 
   def check
@@ -17,7 +24,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    if @post.save
+    if @post.save!
       redirect_to post_path(@post)
     else
       redirect_to movies_path
@@ -51,7 +58,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:movie_id, :review_title, :review_body, :watched_data, :way_to_watch, :rate, :spoiler, :is_active)
+    params.require(:post).permit(:movie_id, :review_title, :review_body, :watched_data, :way_to_watch, :rate, :spoiler, :is_active, :title, :poster_path)
   end
 
 end

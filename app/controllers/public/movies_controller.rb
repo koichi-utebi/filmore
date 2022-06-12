@@ -15,6 +15,8 @@ class Public::MoviesController < ApplicationController
     @post = Post.new
     @posts = Post.where(movie_id: @movie['id']).latest.page(params[:page]).per(10)
     @watched_list = WatchedList.new
+    @wish_list = WishList.new
+    @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @movie['id'])
   end
 
   def search

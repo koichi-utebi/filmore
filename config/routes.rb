@@ -6,9 +6,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update] do                        #会員関連
       get '/quit_check' => 'customers#quit_check', as: 'quit_check'                 #退会確認ページ
       patch '/withdraw' => 'customers#withdraw', as: 'withdraw'                     #会員ステータス更新
-      resource :relationships, only: [:create,:destroy]                             #リレーション関連
-      get 'followings' => 'relationships#followings', as: 'followings'              #フォロー一覧
-      get 'followers' => 'relationships#followers', as: 'followers'                 #フォロワー一覧
+      resource :relationships, only: [:create,:destroy]                             #リレーション関連             #フォロワー一覧
     end
     resources :movies, only: [:index, :show]                                    #映画関連
     get '/search' => 'movies#search', as: 'search'                              #映画タイトル検索
@@ -19,8 +17,8 @@ Rails.application.routes.draw do
       resource :comments, only: [:create, :destroy]                                 #コメント関連
     end
     get '/favorites/index' => 'favorites#index', as: 'favorites'                  #いいねした投稿一覧ページ
-    resources :watched_lists, only: [:index, :create, :destroy]                   #視聴済みリスト関連
-    resources :wish_lists, only: [:index, :create, :destroy]                      #ウィッシュリスト関連
+    resources :watched_lists, only: [:create, :destroy]                   #視聴済みリスト関連
+    resources :wish_lists, only: [:create, :destroy]                      #ウィッシュリスト関連
   end
 
   namespace :admin do                                                           #管理者側ルーティング

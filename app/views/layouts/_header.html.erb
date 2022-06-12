@@ -7,7 +7,9 @@
       <div class="col-md-7 ">
         <%= form_with url: search_path, method: :get, class: "form-inline d-flex justify-content-end" do |f| %>
           <%= f.search_field :looking_for, placeholder: '映画のタイトル', class: "form-control w-75" %>
-          <%= f.submit '検索', class: "btn btn-outline-primary" %>
+          <%= f.button :type => "submit", class: "btn btn-outline-primary" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
         <% end %>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,30 +33,69 @@
         <% elsif customer_signed_in? %> <%#会員ログインしている場合%>
         <div class="d-flex flex-column ml-auto">
           <ul class="navbar-nav d-flex align-items-center">
-            <li>
-              <%= link_to '映画一覧', movies_path, class: "ml-2 btn btn-outline-dark" %>
+            <li class="header-icons">
+              <h2>
+                <%= link_to movies_path, class: "nav-link pt-3" do %>
+                  <i class="fas fa-film"></i>
+                <% end %>
+              </h2>
             </li>
-            <li>
-              <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "ml-2 btn btn-outline-dark" %>
+            <li class="header-text">
+              映画一覧を見る
             </li>
-            <li>
+            <li class="header-icons">
+              <h2>
+                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link pt-3" do %>
+                  <i class="fas fa-sign-out-alt"></i>
+                <% end %>
+              </h2>
+            </li>
+            <li class="header-text">
+              ログアウトする
+            </li>
+            <li class="header-icons">
               <%= link_to customer_path(current_customer), class: "ml-2 " do %>
                 <%= image_tag current_customer.get_profile_image, class: "rounded-circle", size:'60x60' %>
               <% end %>
+            </li>
+            <li class="text-center header-text">
+              マイページへ
             </li>
           </ul>
         </div>
         <% else %><%#ログインしていない場合%>
         <div class="d-flex flex-column ml-auto">
           <ul class="navbar-nav">
-            <li>
-              <%= link_to 'About', about_path, class: "btn btn-outline-dark" %>
+            <li class="header-icons">
+              <h3>
+                <%= link_to about_path, class: "nav-link pt-3 pl-2" do %>
+                  <i class="fas fa-book"></i>
+                <% end %>
+              </h3>
             </li>
-            <li>
-              <%= link_to '新規登録', new_customer_registration_path, class: "ml-2 btn btn-outline-dark" %>
+            <li class="header-text text-center">
+              FILMOREとは
             </li>
-            <li>
-              <%= link_to 'ログイン', new_customer_session_path, class: "ml-2 btn btn-outline-dark" %>
+            <li class="header-icons">
+              <h3>
+                <%= link_to new_customer_registration_path, class: "nav-link pt-3 pl-2" do %>
+                  <i class="fas fa-user-plus"></i>
+                <% end %>
+              </h3>
+            </li>
+            <li class="header-text text-center">
+              新規登録
+            </li>
+            <li class="header-icons">
+              <h3>
+                <%= link_to new_customer_session_path, class: "nav-link pt-3 pl-2" do %>
+                  <i class="fas fa-sign-in-alt"></i>
+                <% end %>
+              </h3>
+            </li>
+            <li class="header-text text-center">
+              ログイン
+            </li>
           </ul>
         </div>
         <% end %>
