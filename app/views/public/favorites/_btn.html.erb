@@ -1,20 +1,20 @@
-<div class="col-md-6 offset-md-2">
+<div class="col-md-2 offset-md-2">
   <% if customer_signed_in? %>
     <% if post.favorited_by?(current_customer) %>
+      <span><%= post.favorites.count %>:</span>
       <%= link_to post_favorites_path(post), method: :delete do %>
         <i class="fas fa-thumbs-up"></i>いいね済
       <% end %>
-      <span>(いいねした人<%= post.favorites.count %>人)</span>
     <% else %>
+      <span><%= post.favorites.count %>:</span>
       <%= link_to post_favorites_path(post), method: :post do %>
         <i class="far fa-thumbs-up"></i>いいね!
       <% end %>
-      <span>(いいねした人<%= post.favorites.count %>人)</span>
     <% end %>
   <% else %>
+    <span><%= post.favorites.count %>:</span>
     <%= link_to post_favorites_path(post), method: :post do %>
       <i class="far fa-thumbs-up"></i>いいね!
     <% end %>
-    <span>(いいねした人<%= post.favorites.count %>人)</span>
   <% end %>
 </div>
