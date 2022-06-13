@@ -1,6 +1,6 @@
 <div class="col-md-3">
   <% if WishList.exists?(movie_id: movie['id'], customer_id: current_customer.id) %>
-    <%= link_to wish_list_path(movie['id']), method: :delete, class: "" do %>
+    <%= link_to wish_list_path(movie['id']), method: :delete, class: "text-decoration-none" do %>
       <i class="fas fa-tasks fa-2x"></i>
     <% end %>
     <span class="text-muted pl-1">(リスト登録済)</span>

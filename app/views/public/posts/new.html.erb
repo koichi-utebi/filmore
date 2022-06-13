@@ -26,14 +26,14 @@
             });
           })
         </script>
-      </div>
+      </div><%#星評価%>
 
       <div class="form-group border-top pt-3">
         <%= f.text_field :review_title, class: "w-100", id: "textfield", placeholder: "レビュータイトル" %>
-      </div>
+      </div><%#レビュータイトル%>
       <div class="form-group border-top border-bottom">
         <%= f.text_area :review_body, class: "w-100", id: "textarea", placeholder: "本文" %>
-      </div>
+      </div><%#レビュー内容%>
       <script>
         $(function(){
           $('#textarea')
@@ -49,8 +49,8 @@
       </script>
       <div class="form-group pt-2">
         <h5><%= f.label :watched_data, "鑑賞日" %></h5>
-        <%= f.date_select :watched_data, {use_month_numbers: true, start_year: 2000, end_year: (Time.now.year), date_separator: '/ ', prompt: "--"}, {class: "new-watched-data-box"} %>
-      </div>
+        <%= f.date_select :watched_data, {start_year: 2000, end_year: (Time.now.year), date_separator: '/ '}, {class: "new-watched-data-box"} %>
+      </div><%# 鑑賞日%>
       <div class="form-group pt-2">
         <h5><%= f.label :way_to_watch, "鑑賞方法" %></h5>
 
@@ -71,7 +71,7 @@
 
         <%= f.radio_button :way_to_watch, "theater", class: "ml-2" %>
         <%= f.label :way_to_watch, "映画館" %>
-      </div>
+      </div><%#鑑賞方法%>
       <%= f.hidden_field :movie_id %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :poster_path %>

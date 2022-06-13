@@ -14,6 +14,9 @@ class Customer < ApplicationRecord
   has_many :favorite, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_one_attached :profile_image
+  validates :name, presence: true, length:{maximum: 10}
+  validates :email, presence: true
+
 
   def follow(user_id)
     relationships.create(followed_id: user_id)

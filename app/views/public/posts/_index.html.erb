@@ -9,7 +9,8 @@
             <% end %>
             <h4>のレビュー</h4>
           </div>
-        </div>
+        </div><%#映画タイトル%>
+
         <div class="row pt-2">
           <div class="col-md-1">
             <%= link_to customer_path(post.customer_id) do %>
@@ -23,11 +24,12 @@
               <% end %>
             </h5>
           </div>
-        </div>
+        </div><%#レビュータイトル%>
+
         <div class="col-md-10 offset-md-1 d-inline-flex">
-          <div id="rate-<%= post.id %>" class="form-group mt-1"></div><p class="ml-1"><%= post.rate %>点</p>
+          <div id="rate-<%= post.id %>" class="form-group"></div><p class="ml-1"><%= post.rate %>点</p>
           <div class="ml-4">
-            <p class="text-muted text-small"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch %></p>
+            <p class="text-muted text-small"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
           </div>
           <script>
           $(document).on('turbolinks:load', function() {
@@ -43,32 +45,50 @@
             });
           });
           </script>
-        </div>
+        </div><%#星評価%>
+
         <div class="col-md-9 offset-md-1 mt-2">
           <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
-        </div>
+        </div><%#レビュー内容%>
+
         <div class="row mt-2 pb-3 border-bottom">
-          <div class="col-md-6 offset-md-1 pl-5">
-          <% if customer_signed_in? %>
-            <% if post.favorited_by?(current_customer) %>
-              <%= link_to post_favorites_path(post), method: :delete do %>
-                <i class="fas fa-thumbs-up"></i>いいね済
+          <div class="col-md-2 offset-md-2">
+            <% if customer_signed_in? %>
+              <% if post.favorited_by?(current_customer) %>
+                <span><%= post.favorites.count %>:</span>
+                <%= link_to post_favorites_path(post), method: :delete do %>
+                  <i class="fas fa-thumbs-up"></i>いいね済
+                <% end %>
+              <% else %>
+                <span><%= post.favorites.count %>:</span>
+                <%= link_to post_favorites_path(post), method: :post do %>
+                  <i class="far fa-thumbs-up"></i>いいね!
+                <% end %>
               <% end %>
-              <span>(いいね!した人<%= post.favorites.count %>人)</span>
             <% else %>
+              <span><%= post.favorites.count %>:</span>
               <%= link_to post_favorites_path(post), method: :post do %>
-                <i class="far fa-thumbs-up"></i>いいね！
+                <i class="far fa-thumbs-up"></i>いいね!
               <% end %>
-              <span>(いいね!した人<%= post.favorites.count %>人)</span>
             <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(post), method: :post do %>
-              <i class="far fa-thumbs-up"></i>いいね！
+          </div><%#いいねボタン%>
+          <div class="col-md-4">
+            <%= post.post_comments.count %>:
+            <% if customer_signed_in? %>
+              <% if post.post_comments.exists?(customer_id: current_customer.id) %>
+                <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+              <% else %>
+                <%= link_to new_post_post_comments_path(post.id) do %>
+                  <i class="far fa-comment"></i>コメントする
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to new_post_post_comments_path(post) do %>
+                <i class="far fa-comment"></i>コメントする
+              <% end %>
             <% end %>
-            <span>(いいね!した人<%= post.favorites.count %>人)</span>
-          <% end %>
-          </div>
-        </div>
+          </div><%#コメントボタン%>
+        </div><%#いいね、コメントボタン%>
       <% end %>
     </div>
   </div>

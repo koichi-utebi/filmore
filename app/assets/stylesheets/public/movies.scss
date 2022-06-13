@@ -5,6 +5,7 @@
 .index-side-bar {
   position: sticky;
   top: 20px;
+  bottom: 0px;
 }
 
 
@@ -16,6 +17,10 @@
 
 .show-poster-img {
   position: fixed;
+}
+
+.show-content-tag {
+  border-bottom: double #000;
 }
 
 .show-review-body {

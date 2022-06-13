@@ -1,0 +1,16 @@
+<div class="col-md-4">
+  <%= post.post_comments.count %>:
+  <% if customer_signed_in? %>
+    <% if post.post_comments.exists?(customer_id: current_customer.id) %>
+      <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+    <% else %>
+      <%= link_to new_post_post_comments_path(post.id) do %>
+        <i class="far fa-comment"></i>コメントする
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to new_post_post_comments_path(post) do %>
+      <i class="far fa-comment"></i>コメントする
+    <% end %>
+  <% end %>
+</div>

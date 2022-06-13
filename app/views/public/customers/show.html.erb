@@ -3,7 +3,7 @@
 
     <div class="col-md-3 p-0">
       <%= render 'side_bar', customer: @customer %>
-    </div>
+    </div><%#サイドバー%>
 
     <div class="col-md-9 show-contents pt-2">
       <ul id="tab-menu">
@@ -13,7 +13,7 @@
         <li><a href="#tab4" class="">フォロワー</a></li>
         <li><a href="#tab5" class="">視聴済みリスト</a></li>
         <li><a href="#tab6" class="">ウィッシュリスト</a></li>
-      </ul>
+      </ul><%#タブメニュー%>
       <div id="tab-contents">
 
         <div id="tab1" class="tab">
@@ -27,7 +27,7 @@
             投稿したレビューがありません
           </h3>
           <% end %>
-        </div>
+        </div><%#過去の投稿%>
 
         <div id="tab2" class="tab">
           <% if @favorite_posts.present? %>
@@ -40,7 +40,7 @@
             いいねしたレビューがありません
           </h3>
           <% end %>
-        </div>
+        </div><%#いいねした投稿%>
 
         <div id="tab3" class="tab">
           <% if @customer_followings.present? %>
@@ -53,7 +53,7 @@
               フォローしているアカウントがありません
             </h3>
           <% end %>
-        </div>
+        </div><%#フォローしているアカウント%>
 
         <div id="tab4" class="tab">
           <% if @customer_followers.present? %>
@@ -66,7 +66,7 @@
               フォローされているアカウンがありません
             </h3>
           <% end %>
-        </div>
+        </div><%#フォローされているアカウント%>
 
         <div id="tab5" class="tab">
           <% if @watched_lists.present? %>
@@ -79,7 +79,7 @@
               リストに映画がありません
             </h3>
           <% end %>
-        </div>
+        </div><%#視聴済みリスト%>
 
         <div id="tab6" class="tab">
           <% if @wish_lists.present? %>
@@ -92,7 +92,7 @@
               リストに映画がありません
             </h3>
           <% end %>
-        </div>
+        </div><%#ウィッシュリスト%>
 
       </div>
     </div>
@@ -106,6 +106,6 @@
       $($(this).attr("href")).show();
       event.preventDefault();
     });
-    </script>
+    </script><%#タブメニューのjs%>
   </div>
 </div>

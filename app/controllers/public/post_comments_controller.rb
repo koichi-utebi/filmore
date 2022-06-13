@@ -4,23 +4,27 @@ class Public::PostCommentsController < ApplicationController
       @post = Post.find(params[:post_id])
       @comment = current_customer.post_comments.new
     else
-      redirect_to new_customer_session_path
+      redirect_to new_customer_session_path, alert: "ログインが必要です"
     end
   end
   def create
-    post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     @comment = current_customer.post_comments.new(post_comment_params)
-    @comment.post_id = post.id
-    @comment.customer_id = current_customer.id
-    @comment.save!
-    redirect_to post_path(post)
+    if @comment.valid?
+      @comment.post_id = post.id
+      @comment.customer_id = current_customer.id
+      @comment.save
+      redirect_to post_path(post), notice: "コメントを投稿しました"
+    else
+      render 'new'
+    end
   end
 
   def destroy
     post = Post.find(params[:post_id])
     @comment = current_customer.post_comments.find_by(post_id: post.id)
     @comment.destroy
-    redirect_to request.referer
+    redirect_to request.referer, alert: "コメントを削除しました"
   end
 
   private

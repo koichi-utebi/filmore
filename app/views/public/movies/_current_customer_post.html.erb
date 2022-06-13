@@ -1,7 +1,7 @@
 <% if customer_signed_in? %>
   <% if post.present? %>
   <div class="row mt-5">
-    <div class="col-md-12 border-bottom">
+    <div class="col-md-12 show-content-tag">
       <h3 class="text-center">あなたの投稿</h3>
     </div>
   </div>
@@ -23,7 +23,7 @@
     <div class="col-md-10 offset-md-1 d-inline-flex ">
       <div id="current-customer-rate-<%= post.id %>" class="form-group"></div><p class="mt-1 ml-1"><%= post.rate %>点</p>
       <div class="ml-4">
-        <p class="text-muted mt-1"><%= current_customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch %></p>
+        <p class="text-muted mt-1"><%= current_customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
       </div>
       <script>
       $(document).on('turbolinks:load', function() {

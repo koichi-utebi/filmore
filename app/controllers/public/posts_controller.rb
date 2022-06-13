@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
         render 'new'
       end
     else
-      redirect_to new_customer_session_path
+      redirect_to new_customer_session_path, alert: "ログインが必要です"
     end
   end
 
@@ -31,10 +31,10 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    if @post.save!
-      redirect_to post_path(@post)
+    if @post.save
+      redirect_to post_path(@post), notice: "レビューを投稿しました"
     else
-      redirect_to movies_path
+      redirect_to movie_path(@post.movie_id), alert: "レビューを投稿できませんでした"
     end
   end
 
@@ -51,7 +51,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post)
+      redirect_to post_path(@post), notice: "レビューを更新しました"
     else
       render :edit
     end
@@ -60,7 +60,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to movies_path
+    redirect_to movie_path(post.movie_id), alert: "レビューを削除しました"
   end
 
   private

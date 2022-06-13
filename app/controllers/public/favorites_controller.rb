@@ -6,7 +6,7 @@ class Public::FavoritesController < ApplicationController
       favorite.save
       redirect_to request.referer
     else
-      redirect_to new_customer_session_path
+      redirect_to new_customer_session_path, alert: "ログインが必要です"
     end
   end
 

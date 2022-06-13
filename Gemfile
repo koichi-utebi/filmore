@@ -66,3 +66,5 @@ gem 'themoviedb-api', '~>1.3'
 gem 'dotenv-rails'
 
 gem 'httparty', '0.13.5'
+
+gem 'devise-i18n'

@@ -21,6 +21,20 @@
   box-sizing: border-box;
 }
 
+#error_explanation {
+  background-color: rgba(128,128,128,0.8);
+  width: 500px;
+  padding: 10px;
+  color: white;
+  border: solid 2px red;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
 .header-icons {
   position: relative;
 }
@@ -51,4 +65,23 @@
 }
 .header-icons:hover + .header-text {
   display: block;
+}
+
+/*エラーメッセージ*/
+#notice{
+  color: green;
+  font-size: 20px;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  z-index: 1;
+}
+
+#alert {
+  color: red;
+  font-size: 20px;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  z-index: 1;
 }

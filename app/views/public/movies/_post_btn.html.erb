@@ -6,7 +6,7 @@
         <i class="fas fa-edit"></i>レビューを編集
       <% end %>
     <% else %>
-      <%= form_with model: post, url: new_post_path, method: :get do |f| %>
+      <%= form_with model: model, url: new_post_path, method: :get do |f| %>
         <%= f.hidden_field :movie_id, :value => movie['id'].to_i %>
         <%= f.hidden_field :title, :value => movie['title'] %>
         <%= f.hidden_field :poster_path, :value => movie['poster_path'] %>

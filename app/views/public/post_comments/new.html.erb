@@ -4,6 +4,7 @@
       <h5 class="text-center">コメントを書く</h5>
       <div class="form">
         <%= form_with model: @comment, url: post_post_comments_path, method: :post do |f| %>
+          <% render 'layouts/errors', obj: @comment %>
           <div class="form-group text-center">
             <%= f.text_area :comment, class: "w-75", id: "commentarea", placeholder: "内容" %>
           </div>
