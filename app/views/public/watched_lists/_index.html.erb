@@ -1,8 +1,18 @@
 <% lists.each do |list| %>
 <div class="row d-inline-flex">
-  <div class="m-4">
+  <div class="m-4 list-poster-image">
     <%= link_to movie_path(list.movie_id) do %>
-      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + list.poster_path, class: "rounded mb-3", size: '200x300'%>
+      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + list.poster_path, class: "rounded mb-3", size: '300x450'%>
+    <% end %>
+    <% if obj.exists?(movie_id: list.movie_id) %>
+      <div class="list-tag">
+        <i class="fas fa-star fa-2x"></i>
+      </div>
+    <% end %>
+    <% if @posts.exists?(movie_id: list.movie_id) %>
+      <div class="post-tag">
+        <i class="fas fa-pen fa-2x"></i>
+      </div>
     <% end %>
   </div>
 </div>

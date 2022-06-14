@@ -31,6 +31,12 @@
   font-weight: bold;
 }
 
+header {
+  background: #ebf6f7;
+  position: relative;
+  z-index: 10;
+}
+
 .field_with_errors {
   display: contents;
 }

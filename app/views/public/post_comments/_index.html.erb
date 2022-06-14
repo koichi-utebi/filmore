@@ -20,9 +20,9 @@
         <p><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
       </div>
     </div>
-    <% if post_comment.customer_id == current_customer.id %>
+    <% if post_comment.customer == current_customer || admin_signed_in? %>
       <div class="row">
-        <div class="col-md-9 offset-md-2 border-bottom pb-3 mb-3">
+        <div class="col-md-10 offset-md-2 border-bottom pb-3 mb-3">
           <div class="float-right">
             <%= link_to post_post_comments_path(post_comment.post_id), method: :delete, class: "text-danger text-decoration-none" do %>
               <i class="fas fa-trash-alt"></i>

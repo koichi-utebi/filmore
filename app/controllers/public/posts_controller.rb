@@ -1,4 +1,5 @@
-class Public::PostsController < ApplicationController
+class Public::PostsController < Public::ApplicationController
+   before_action :authenticate_customer!, except: [:index, :show]
   def index
     @posts = Post.latest.page(params[:page]).per(10)
     @customer = current_customer

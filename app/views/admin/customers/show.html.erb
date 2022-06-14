@@ -1,2 +1,111 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="p-0">
+      <%= render 'public/customers/side_bar', customer: @customer %>
+    </div><%#サイドバー%>
+
+    <div class="col-md-9 show-contents pt-2">
+      <ul id="tab-menu">
+        <li><a href="#tab1" class="active">過去の投稿</a></li>
+        <li><a href="#tab2" class="">いいねした投稿</a></li>
+        <li><a href="#tab3" class="">フォロー中</a></li>
+        <li><a href="#tab4" class="">フォロワー</a></li>
+        <li><a href="#tab5" class="">視聴済みリスト</a></li>
+        <li><a href="#tab6" class="">ウィッシュリスト</a></li>
+      </ul><%#タブメニュー%>
+      <div id="tab-contents">
+
+        <div id="tab1" class="tab">
+          <% if @posts.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              <%= @customer.name %>さんの投稿<small>(全<%= @posts.count %>件)</small>
+            </h3>
+            <%= render 'public/posts/index', customer: @customer, posts: @posts %>
+          <% else %>
+          <h3 class="border-bottom pt-3 pb-3 pl-4">
+            投稿したレビューがありません
+          </h3>
+          <% end %>
+        </div><%#過去の投稿%>
+
+        <div id="tab2" class="tab">
+          <% if @favorite_posts.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              <%= @customer.name %>さんがいいねした投稿<small>(全<%= @favorite_posts.count %>件)</small>
+            </h3>
+            <%= render 'public/posts/index', customer: @customer, posts: @favorite_posts %>
+          <% else %>
+          <h3 class="border-bottom pt-3 pb-3 pl-4">
+            いいねしたレビューがありません
+          </h3>
+          <% end %>
+        </div><%#いいねした投稿%>
+
+        <div id="tab3" class="tab">
+          <% if @customer_followings.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォロー中: <%= @customer_followings.count %>
+            </h3>
+            <%= render 'public/relationships/index', customer: @customer_followings %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォローしているアカウントがありません
+            </h3>
+          <% end %>
+        </div><%#フォローしているアカウント%>
+
+        <div id="tab4" class="tab">
+          <% if @customer_followers.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォロワー数: <%= @customer_followers.count %>
+            </h3>
+            <%= render 'public/relationships/index', customer: @customer_followers %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              フォローされているアカウンがありません
+            </h3>
+          <% end %>
+        </div><%#フォローされているアカウント%>
+
+        <div id="tab5" class="tab">
+          <% if @watched_lists.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              視聴済みリスト<small>(全<%=@watched_lists.count%>件)</small>
+            </h3>
+            <%= render 'public/watched_lists/index', lists: @watched_lists %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              リストに映画がありません
+            </h3>
+          <% end %>
+        </div><%#視聴済みリスト%>
+
+        <div id="tab6" class="tab">
+          <% if @wish_lists.present? %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              ウィッシュリスト<small>(全<%= @wish_lists.count %>件)</small>
+            </h3>
+            <%= render 'public/watched_lists/index', lists: @wish_lists %>
+          <% else %>
+            <h3 class="border-bottom pt-3 pb-3 pl-4">
+              リストに映画がありません
+            </h3>
+          <% end %>
+        </div><%#ウィッシュリスト%>
+
+      </div>
+    </div>
+    <script>
+    $('#tab-contents .tab[id != "tab1"]').hide();
+
+    $('#tab-menu a').on('click', function(event) {
+      $("#tab-contents .tab").hide();
+      $("#tab-menu .active").removeClass("active");
+      $(this).addClass("active");
+      $($(this).attr("href")).show();
+      event.preventDefault();
+    });
+    </script><%#タブメニューのjs%>
+  </div>
+</div>

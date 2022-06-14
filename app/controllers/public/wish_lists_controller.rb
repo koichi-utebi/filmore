@@ -1,4 +1,4 @@
-class Public::WishListsController < ApplicationController
+class Public::WishListsController < Public::ApplicationController
   def create
     if customer_signed_in?
       @wish_list = WishList.new(wish_list_params)

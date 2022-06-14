@@ -1,4 +1,4 @@
-class Public::WatchedListsController < ApplicationController
+class Public::WatchedListsController < Public::ApplicationController
   def create
     if customer_signed_in?
       @watched_list = WatchedList.new(watched_list_params)

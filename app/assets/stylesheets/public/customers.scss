@@ -3,41 +3,94 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .show-side-bar {
-  width: 100%;
+  width: 20%;
+  padding-top: 100px;
   height: 100vh;
-  position: sticky;
+  position: fixed;
+  top: 0;
+  background: #ebf6f7;
+}
+
+.show-movie-poster img {
+  width: 100%;
+}
+
+.show-tab-title {
+  border-bottom: groove 10px #59b9c6;
+}
+
+.list-poster-image {
+  position: relative;
+}
+
+
+.background-icon {
+  position: absolute;
+  top: 80px;
+  left: 1000px;
+  font-size: 30rem;
+  color: #ebf6f7;
+}
+
+.list-tag {
+  position:  absolute;
+  padding: 10px 5px;
+  background:  #00a3af;
+  color: white;
   top: 0px;
+  left: 42px;
+  border-radius:  4px;
+}
+
+.post-tag {
+  position:  absolute;
+  padding: 10px 5px;
+  background:  #38b48b;
+  color: white;
+  top: 0px;
+  border-radius:  4px;
+}
+
+.star {
+  color: #00a3af;
+}
+
+.pen {
+  color: #38b48b;
 }
 
 
 #tab-menu {
-  display: flex;
+  margin: 30px 0;
 }
 
 #tab-menu li {
   list-style-type: none;
-  width: 25%;
+  width: 80%;
+  margin: 0 auto;
+  padding: 5px 0px;
 }
 
 #tab-menu li a {
   color: black;
   text-decoration: none;
   display: block;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
-  background: linear-gradient(#99FFFF,75%,white);
-  border-radius: 50px 50px 5px 5px;
+  background: #ebf6f7;
+  border:  solid 1px #84a2d4;
+  border-radius: 50px 50px 50px 50px;
 }
 
 #tab-menu .active {
-  background: #fff;
-  color: #000;
-  border-bottom: none;
+  background: #84a2d4;
 }
 
 #tab-contents {
   display: flex;
   flex-wrap: wrap;
+  background-color: transparent;
 }
 
 #tab-contents .tab {

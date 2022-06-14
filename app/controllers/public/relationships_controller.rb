@@ -1,4 +1,4 @@
-class Public::RelationshipsController < ApplicationController
+class Public::RelationshipsController < Public::ApplicationController
   def create
     if customer_signed_in?
       @customer = Customer.find(params[:customer_id])

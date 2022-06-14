@@ -17,6 +17,7 @@ class Customer < ApplicationRecord
   validates :name, presence: true, length:{maximum: 10}
   validates :email, presence: true
 
+  scope :latest, -> {order(created_at: :desc)}
 
   def follow(user_id)
     relationships.create(followed_id: user_id)

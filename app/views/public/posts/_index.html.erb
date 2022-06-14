@@ -2,22 +2,33 @@
   <div class="col-md-12">
     <div class="mb-5">
       <% posts.each do |post| %>
+      <div class="row border-bottom">
+        <div class="col-md-3 pt-5">
+          <div class="show-movie-poster">
+            <%= image_tag 'https://image.tmdb.org/t/p/w1280' + post.poster_path, class: "rounded mb-3"%><br/>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+
         <div class="row pt-2">
           <div class="col-md-10 offset-md-1 d-inline-flex">
-              <%= link_to movie_path(post.movie_id) do %>
-            <h4>"<%= post.title %>"</h4>
+            <h4>
+            <%= link_to movie_path(post.movie_id) do %>
+              "<%= post.title %>"
             <% end %>
-            <h4>のレビュー</h4>
+            のレビュー
+            </h4>
           </div>
         </div><%#映画タイトル%>
 
         <div class="row pt-2">
-          <div class="col-md-1">
+          <div>
             <%= link_to customer_path(post.customer_id) do %>
               <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
             <% end %>
           </div>
-          <div class="col-md-9 pt-3 pl-4">
+          <div>
             <h5>
               <%= link_to post_path(post) do %>
                 <%= post.review_title %>
@@ -47,11 +58,11 @@
           </script>
         </div><%#星評価%>
 
-        <div class="col-md-9 offset-md-1 mt-2">
+        <div class="col-md-10 offset-md-1 mt-2">
           <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
         </div><%#レビュー内容%>
 
-        <div class="row mt-2 pb-3 border-bottom">
+        <div class="row mt-2 pb-3">
           <div class="col-md-2 offset-md-2">
             <% if customer_signed_in? %>
               <% if post.favorited_by?(current_customer) %>
@@ -89,6 +100,8 @@
             <% end %>
           </div><%#コメントボタン%>
         </div><%#いいね、コメントボタン%>
+        </div>
+      </div>
       <% end %>
     </div>
   </div>

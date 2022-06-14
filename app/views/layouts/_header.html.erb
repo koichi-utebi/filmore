@@ -1,4 +1,4 @@
-<header class="border-bottom">
+<header class="">
   <nav class="navbar navbar-expand-lg navbar-light p-3">
     <div class="container-fluid">
       <div class="col-md-2">
@@ -18,15 +18,30 @@
       <div class="col-md-3 colapse navbar-collapse" id="navbarNavDropdown">
         <% if admin_signed_in? %> <%#管理者ログインしている場合%>
         <div class="d-flex flex-column ml-auto">
-          <ul class="navbar-nav">
-            <li>
-              <%= link_to '投稿一覧', admin_root_path, class: "btn btn-outline-dark" %>
+          <ul class="navbar-nav d-flex align-items-center">
+            <li class="header-icons">
+              <%= link_to admin_root_path, class: "nav-link pt-3" do %>
+                <i class="fas fa-book-open fa-2x"></i>
+              <% end %>
             </li>
-            <li>
-              <% link_to '会員一覧', admin_customers_path, class: "btn btn-outline-dark" %>
+            <li class="header-text text-center">
+              レビュー一覧
             </li>
-            <li>
-              <% link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
+            <li class="header-icons">
+              <%= link_to admin_customers_path, class: "nav-link pt-3" do %>
+                <i class="fas fa-users fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="header-text text-center">
+              会員一覧
+            </li>
+            <li class="header-icons">
+              <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link pt-3" do %>
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="header-text text-center">
+              ログアウト
             </li>
           </ul>
         </div>

@@ -1,11 +1,15 @@
-class Public::CustomersController < ApplicationController
+class Public::CustomersController < Public::ApplicationController
+  before_action :authenticate_customer!, except: [:show]
   def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts.latest.page(params[:page]).per(10)
+
     @watched_lists = @customer.watched_lists.latest
     @wish_lists = @customer.wish_lists.latest
+
     @customer_followings = @customer.followings
     @customer_followers = @customer.followers
+    
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end
@@ -36,7 +40,7 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     if @customer.update(is_active: false)
       reset_session
-      redirect_to root_path
+      redirect_to root_path, notice: "退会しました"
     else
       render "quit_check"
     end

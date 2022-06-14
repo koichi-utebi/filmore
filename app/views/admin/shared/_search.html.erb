@@ -1,0 +1,6 @@
+<%= form_with url: link, method: :get, class: "form-inline d-flex justify-content-center" do |f| %>
+  <%= f.search_field :word, placeholder: '絞り込む', class: "form-control w-75" %>
+  <%= f.button :type => "submit", class: "btn btn-outline-primary" do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+<% end %>

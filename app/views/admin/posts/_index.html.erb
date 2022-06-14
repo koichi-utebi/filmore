@@ -1,0 +1,46 @@
+<table class="table table-invers border-bottom">
+  <thead>
+    <tr>
+      <th style="width: 24%">投稿者</th>
+      <th style="width: 38%">レビュータイトル</th>
+      <th style="width: 22%">映画タイトル</th>
+      <th style="width: 8%">投稿日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.each do |post| %>
+    <tr>
+      <td class="align-middle">
+        <%= link_to admin_customer_path(post.customer_id), class: "text-decoration-none" do %>
+          <%= image_tag post.customer.get_profile_image, class: "rounded-circle", size: "70x70" %>
+          <span><%= post.customer.name %></span>
+        <% end %>
+      </td>
+      <td class="align-middle">
+        <%= link_to admin_post_path(post) do %>
+          <%= post.review_title %>
+        <% end %>
+      </td>
+      <td class="align-middle">
+        <%= link_to movie_path(post.movie_id) do %>
+          <%= post.title %>
+        <% end %>
+      </td>
+      <td class="align-middle">
+        <u> <%= post.created_at.strftime("%Y/%m/%d") %> </u>
+      </td>
+      <td class="align-middle">
+        <% if post.is_active == true %>
+          <span class="text-success">有効</span>
+        <% else %>
+          <span class="text-danger">無効</span>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+<div class="mx-auto">
+  <%= paginate posts %>
+</div>

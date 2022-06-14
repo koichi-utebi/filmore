@@ -1,36 +1,55 @@
-<div class="show-side-bar border-right">
+<div class="show-side-bar">
   <div class="pt-3 mb-3 text-center">
     <%= image_tag customer.get_profile_image, class: "rounded-circle", size: "150x150" %>
   </div>
   <div class="mt-3 mb-3 text-center">
     <h5><%= customer.name %></h5>
   </div>
-  <div class="mt-2 col-md-8 offset-md-2 d-inline-flex">
-    <p>
-      <%= customer.followings.count %>:フォロー
-    </p>
-    <p class="mx-1">|</p>
-    <p>
+  <div class="mt-2 text-center">
+    <span>
+      <%= customer.followings.count %>:フォロー |
       <%= customer.followers.count %>:フォロワー
-    </p>
+    </span>
   </div>
   <% if customer_signed_in?%>
-    <% if customer.id == current_customer.id %>
+    <% if customer.id == current_customer.id%>
     <div class="text-center">
-      <%= link_to "プロフィール編集", edit_customer_path, class: "btn btn-outline-success w-75" %>
+      <%= link_to edit_customer_path, class: "text-success" do %>
+        <i class="fas fa-user-edit"></i>プロフィール編集
+      <% end %>
     </div>
     <% else %>
       <div class="text-center">
         <% if current_customer.following?(customer) %>
-          <%= link_to "フォロー解除", customer_relationships_path(customer.id), method: :delete, class: "btn btn-outline-danger w-75" %>
+          <%= link_to customer_relationships_path(customer.id), method: :delete, class: "text-primary" do %>
+            <i class="fas fa-user-check"></i>フォロー済
+          <% end %>
         <% else %>
-          <%= link_to "フォロー", customer_relationships_path(customer.id), method: :post, class: "btn btn-outline-info w-75" %>
+          <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary" do %>
+            <i class="fas fa-user-plus"></i>フォロー
+          <% end %>
         <% end %>
       </div>
     <% end %>
+  <% elsif admin_signed_in? %>
+    <div class="text-center">
+      <%= link_to edit_admin_customer_path, class: "text-success" do %>
+        <i class="fas fa-user-edit"></i>プロフィール編集
+      <% end %>
+    </div>
   <% else %>
     <div class="text-center">
-      <%= link_to "フォロー", customer_relationships_path(customer.id), method: :post, class: "btn btn-outline-info w-75" %>
+      <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary" do %>
+        <i class="fas fa-user-plus"></i>フォロー
+      <% end %>
     </div>
   <% end %>
+  <ul id="tab-menu">
+    <li><a href="#tab1" class="active"><i class="fas fa-pen"></i>過去の投稿</a></li>
+    <li><a href="#tab2" class=""><i class="fas fa-thumbs-up"></i>いいねした投稿</a></li>
+    <li><a href="#tab3" class=""><i class="fas fa-user-check"></i></i>フォロー中</a></li>
+    <li><a href="#tab4" class=""><i class="fas fa-users"></i>フォロワー</a></li>
+    <li><a href="#tab5" class=""><i class="fas fa-video"></i>視聴済みリスト</a></li>
+    <li><a href="#tab6" class=""><i class="fas fa-film"></i>ウィッシュリスト</a></li>
+  </ul><%#タブメニュー%>
 </div>

@@ -1,4 +1,4 @@
-class Public::FavoritesController < ApplicationController
+class Public::FavoritesController < Public::ApplicationController
   def create
     if customer_signed_in?
       @post = Post.find(params[:post_id])

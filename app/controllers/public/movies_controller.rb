@@ -1,4 +1,5 @@
-class Public::MoviesController < ApplicationController
+class Public::MoviesController < Public::ApplicationController
+   before_action :authenticate_customer!, except: [:index, :show, :search, :genre_search]
   def index
     response = Movie.now_playing#公開中の映画情報を取得
     @movies = Array.new#配列の初期化

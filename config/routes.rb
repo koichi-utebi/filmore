@@ -24,7 +24,11 @@ Rails.application.routes.draw do
   namespace :admin do                                                           #管理者側ルーティング
     root :to => 'posts#index'                                                     #投稿一覧ページ
     resources :customers, only: [:index, :show, :edit, :update]                   #会員関連
-    resources :posts, only: [:show, :update]                                      #投稿関連
+    resources :posts, only: [:show, :edit, :update]                               #投稿関連
+    get '/post_search' => 'posts#post_search', as: 'post_search'
+    get '/post_sort' => 'posts#post_sort', as: 'post_sort'
+    get '/customer_search' => 'customers#customer_search', as: 'customer_search'
+    get '/customer_sort' => 'customers#customer_sort', as: 'customer_sort'
   end
 
 

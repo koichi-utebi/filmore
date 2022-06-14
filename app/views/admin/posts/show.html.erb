@@ -1,2 +1,59 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="container">
+  <div class="col-md-10 offset-md-1">
+  <%= render 'layouts/flash_message' %>
+  </div>
+  <div class="row">
+    <div class="col-md-8 pt-5 offset-md-2">
+      <h4>
+        <%= link_to movie_path(@post.movie_id) do %>
+          "<%= @post.title %>"
+        <% end %>
+      </h4>
+      <h4 class="border-bottom"><%= @post.customer.name %>さんのレビュー</h4>
+
+      <div class="row">
+        <div class="col-md-2 mt-2">
+          <%= link_to customer_path(@customer.id) do %>
+            <%= image_tag @post.customer.get_profile_image, class: "rounded-circle", size: '80x80' %>
+          <% end %>
+        </div><%#プロフィール画像%>
+        <div class="col-md-10 mt-2">
+          <h5 class="text-primary"><%= @post.review_title %></h5>
+        </div><%#レビュータイトル%>
+      </div>
+      <div class="row">
+        <%= render 'public/posts/rate', post: @post %>
+      </div><%#星の採点%>
+      <div class="row">
+        <div class="col-md-10 offset-md-2">
+          <div>
+            <p class="text-muted"><%= @post.customer.name %>さん | <%= @post.watched_data.strftime('%Y年%m月%d日') %> | <%= @post.way_to_watch_i18n %></p>
+          </div>
+        </div>
+      </div><%#アカウント名、鑑賞日、鑑賞方法%>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-10 offset-md-2 pd-1">
+          <p><%= safe_join(@post.review_body.split("\n"),tag(:br)) %></p>
+        </div>
+      </div><%# レビュー内容%>
+      <div class="row pb-5">
+        <div class="col-md-2 text-primary offset-md-2">
+          <%= @post.favorites.count %>:
+          <i class="far fa-thumbs-up"></i>いいね!
+        </div>
+        <div class="col-md-4 text-primary">
+          <%= @post.post_comments.count %>:
+          <i class="far fa-comment"></i>コメントする
+        </div>
+        <div class="col-md-2 offset-md-2 pb-3">
+          <div class="float-right">
+            <%= link_to edit_admin_post_path, class: "text-success text-decoration-none" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+          </div>
+        </div><%#編集、削除ボタン%>
+      </div>
+      <%= render 'public/post_comments/index', post_comments: @post_comments %><%#コメント一覧%>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
-class Public::HomesController < ApplicationController
-
+class Public::HomesController < Public::ApplicationController
+   before_action :authenticate_customer!, except: [:top, :about]
   def top
     response = Movie.now_playing#公開中の映画情報を取得
     @movies = Array.new#配列の初期化

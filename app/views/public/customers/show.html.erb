@@ -1,24 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-
     <div class="col-md-3 p-0">
-      <%= render 'side_bar', customer: @customer %>
-    </div><%#サイドバー%>
+      <%= render 'side_bar', customer: @customer %><%#サイドバー%>
+    </div>
 
-    <div class="col-md-9 show-contents pt-2">
-      <ul id="tab-menu">
-        <li><a href="#tab1" class="active">過去の投稿</a></li>
-        <li><a href="#tab2" class="">いいねした投稿</a></li>
-        <li><a href="#tab3" class="">フォロー中</a></li>
-        <li><a href="#tab4" class="">フォロワー</a></li>
-        <li><a href="#tab5" class="">視聴済みリスト</a></li>
-        <li><a href="#tab6" class="">ウィッシュリスト</a></li>
-      </ul><%#タブメニュー%>
+    <div class="pt-2 col-md-9 show-contents">
       <div id="tab-contents">
 
         <div id="tab1" class="tab">
           <% if @posts.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               <%= @customer.name %>さんの投稿<small>(全<%= @posts.count %>件)</small>
             </h3>
             <%= render 'public/posts/index', customer: @customer, posts: @posts %>
@@ -31,7 +22,7 @@
 
         <div id="tab2" class="tab">
           <% if @favorite_posts.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               <%= @customer.name %>さんがいいねした投稿<small>(全<%= @favorite_posts.count %>件)</small>
             </h3>
             <%= render 'public/posts/index', customer: @customer, posts: @favorite_posts %>
@@ -44,7 +35,7 @@
 
         <div id="tab3" class="tab">
           <% if @customer_followings.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               フォロー中: <%= @customer_followings.count %>
             </h3>
             <%= render 'public/relationships/index', customer: @customer_followings %>
@@ -57,7 +48,7 @@
 
         <div id="tab4" class="tab">
           <% if @customer_followers.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               フォロワー数: <%= @customer_followers.count %>
             </h3>
             <%= render 'public/relationships/index', customer: @customer_followers %>
@@ -70,10 +61,14 @@
 
         <div id="tab5" class="tab">
           <% if @watched_lists.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               視聴済みリスト<small>(全<%=@watched_lists.count%>件)</small>
             </h3>
-            <%= render 'public/watched_lists/index', lists: @watched_lists %>
+            <div class="col-md-6 offset-md-1">
+              <i class="fas fa-star fa-2x star"></i>: また観たい！
+              <i class="fas fa-pen fa-2x pen"></i>: レビュー済み
+            </div>
+            <%= render 'public/watched_lists/index', lists: @watched_lists, obj: @wish_lists %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               リストに映画がありません
@@ -83,10 +78,14 @@
 
         <div id="tab6" class="tab">
           <% if @wish_lists.present? %>
-            <h3 class="border-bottom pt-3 pb-3 pl-4">
+            <h3 class="show-tab-title pt-3 pl-4">
               ウィッシュリスト<small>(全<%= @wish_lists.count %>件)</small>
             </h3>
-            <%= render 'public/watched_lists/index', lists: @wish_lists %>
+            <div class="col-md-6 offset-md-1 show-icon-explain">
+              <span><i class="fas fa-star fa-2x star"></i>: また観たい！</span>
+              <span><i class="fas fa-pen fa-2x pen"></i>: レビュー済み</span>
+            </div>
+            <%= render 'public/watched_lists/index', lists: @wish_lists, obj: @watched_lists %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               リストに映画がありません
