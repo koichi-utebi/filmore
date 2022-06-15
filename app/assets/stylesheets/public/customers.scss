@@ -19,17 +19,30 @@
   border-bottom: groove 10px #59b9c6;
 }
 
-.list-poster-image {
+.relationships-list {
+  width: 300px;
   position: relative;
 }
 
-
-.background-icon {
+.ff-tag {
   position: absolute;
-  top: 80px;
-  left: 1000px;
-  font-size: 30rem;
-  color: #ebf6f7;
+  top: 0;
+  left: 0px;
+  color: white;
+  background: #59b9c6;
+  padding: 5px 10px;
+  border-radius: 30px;
+}
+
+.ff-tag-explanation {
+  color: white;
+  background: #59b9c6;
+  padding: 5px 10px;
+  border-radius: 30px;
+}
+
+.list-poster-image {
+  position: relative;
 }
 
 .list-tag {
@@ -50,6 +63,7 @@
   top: 0px;
   border-radius:  4px;
 }
+
 
 .star {
   color: #00a3af;

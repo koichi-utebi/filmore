@@ -1,3 +1,125 @@
 // Place all the styles related to the public/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.top-image {
+  height: 600px;
+  background-image: url('top-bg.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  position: relative;
+}
+
+.top-text {
+  width: 80%;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+}
+
+.top-main-title {
+  background-image: url('film.jpeg');
+  background-size: contain;
+  height: 100px;
+}
+
+.top-main-title h2 {
+  color: #fff;
+  text-shadow: 2px 2px 0 #000,
+              -2px 2px 0 #000,
+              2px -2px 0 #000,
+              -2px -2px 0 #000;
+}
+
+.top-poster img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 2 / 3;
+}
+
+.about-bg {
+  height: 100vh;
+  background-image: url('theator.jpeg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-contents {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
+
+.about-contents img {
+  width: 60%;
+}
+
+.about-text {
+  display: flex;
+}
+
+.text {
+  width: 30%;
+  margin: 1%;
+  padding: 2% 0;
+  background: #ebf6f7;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 959px) {
+  /* 959px以下に適用されるCSS（タブレット用） */
+  .top-image::after {
+    content: '';
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 600px;
+  }
+
+  .top-text {
+    width: 80%;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    z-index: 1;
+  }
+
+  .top-text img {
+    width: 80%;
+  }
+
+  .top-main-title {
+    background-image: url('film.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: auto;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+
+  .top-image {
+    height: 220px;
+  }
+
+	.top-text {
+	  width: 100%;
+	  left: 0;
+	  top: 5%;
+	}
+	.top-text h1{
+	  font-size: 30px;
+	}
+
+	.top-text h3 {
+	  font-size: 18px;
+	}
+}

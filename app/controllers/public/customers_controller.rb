@@ -2,14 +2,14 @@ class Public::CustomersController < Public::ApplicationController
   before_action :authenticate_customer!, except: [:show]
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts.latest.page(params[:page]).per(10)
+    @posts = @customer.posts.where(is_active: true).latest.page(params[:page]).per(10)
 
     @watched_lists = @customer.watched_lists.latest
     @wish_lists = @customer.wish_lists.latest
 
     @customer_followings = @customer.followings
     @customer_followers = @customer.followers
-    
+
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end

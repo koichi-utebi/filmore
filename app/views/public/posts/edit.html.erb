@@ -72,6 +72,12 @@
         <%= f.radio_button :way_to_watch, "theater", class: "ml-2" %>
         <%= f.label :way_to_watch, "映画館" %>
       </div>
+
+      <div class="form-group pt-2 text-center">
+        <%= f.check_box :spoiler %>
+        <%= f.label :spoiler, "ネタバレを含む", class: "text-danger" %>
+      </div>
+
       <%= f.hidden_field :movie_id %>
 
       <div class="col-md-4 offset-md-4 form-group">

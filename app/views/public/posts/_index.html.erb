@@ -23,12 +23,12 @@
         </div><%#映画タイトル%>
 
         <div class="row pt-2">
-          <div>
+          <div class="col-md-1">
             <%= link_to customer_path(post.customer_id) do %>
               <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
             <% end %>
           </div>
-          <div>
+          <div class="col-md-10">
             <h5>
               <%= link_to post_path(post) do %>
                 <%= post.review_title %>
@@ -58,17 +58,29 @@
           </script>
         </div><%#星評価%>
 
-        <div class="col-md-10 offset-md-1 mt-2">
-          <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
-        </div><%#レビュー内容%>
-
-        <div class="row mt-2 pb-3">
-          <div class="col-md-2 offset-md-2">
-            <% if customer_signed_in? %>
-              <% if post.favorited_by?(current_customer) %>
-                <span><%= post.favorites.count %>:</span>
-                <%= link_to post_favorites_path(post), method: :delete do %>
-                  <i class="fas fa-thumbs-up"></i>いいね済
+        <% if post.spoiler == true %>
+          <div class="col-md-6 offset-md-2 mt-2 mb-3 text-center">
+            <%= link_to post_path(post), class: "text-decoration-none text-danger" do %>
+              <h5>!このレビューはネタバレを含みます!</h5>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="col-md-10 offset-md-1 mt-2">
+              <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
+          </div><%#レビュー内容%>
+          <div class="row mt-2 pb-3">
+            <div class="col-md-2 offset-md-2">
+              <% if customer_signed_in? %>
+                <% if post.favorited_by?(current_customer) %>
+                  <span><%= post.favorites.count %>:</span>
+                  <%= link_to post_favorites_path(post), method: :delete do %>
+                    <i class="fas fa-thumbs-up"></i>いいね済
+                  <% end %>
+                <% else %>
+                  <span><%= post.favorites.count %>:</span>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    <i class="far fa-thumbs-up"></i>いいね!
+                  <% end %>
                 <% end %>
               <% else %>
                 <span><%= post.favorites.count %>:</span>
@@ -76,30 +88,25 @@
                   <i class="far fa-thumbs-up"></i>いいね!
                 <% end %>
               <% end %>
-            <% else %>
-              <span><%= post.favorites.count %>:</span>
-              <%= link_to post_favorites_path(post), method: :post do %>
-                <i class="far fa-thumbs-up"></i>いいね!
-              <% end %>
-            <% end %>
-          </div><%#いいねボタン%>
-          <div class="col-md-4">
-            <%= post.post_comments.count %>:
-            <% if customer_signed_in? %>
-              <% if post.post_comments.exists?(customer_id: current_customer.id) %>
-                <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+            </div><%#いいねボタン%>
+            <div class="col-md-4">
+              <%= post.post_comments.count %>:
+              <% if customer_signed_in? %>
+                <% if post.post_comments.exists?(customer_id: current_customer.id) %>
+                  <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+                <% else %>
+                  <%= link_to new_post_post_comments_path(post.id) do %>
+                    <i class="far fa-comment"></i>コメントする
+                  <% end %>
+                <% end %>
               <% else %>
-                <%= link_to new_post_post_comments_path(post.id) do %>
+                <%= link_to new_post_post_comments_path(post) do %>
                   <i class="far fa-comment"></i>コメントする
                 <% end %>
               <% end %>
-            <% else %>
-              <%= link_to new_post_post_comments_path(post) do %>
-                <i class="far fa-comment"></i>コメントする
-              <% end %>
-            <% end %>
-          </div><%#コメントボタン%>
+            </div><%#コメントボタン%>
         </div><%#いいね、コメントボタン%>
+        <% end %>
         </div>
       </div>
       <% end %>

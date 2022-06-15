@@ -41,19 +41,34 @@
         </script>
       </div>
     </div>
-    <div class="row mt-3 mb-3">
-      <div class="col-md-12 show-review-body pd-1">
-        <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
+    <% if post.spoiler == true %>
+      <div class="row mt-3">
+        <div class="col-md-8 offset-md-2 pb-5 border-bottom text-center">
+          <%= link_to post_path(post), class: "text-danger text-decoration-none" do %>
+            <h5>!このレビューはネタバレを含みます！</h5>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-12 show-review-body pd-1">
+          <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
+        </div>
+      </div>
 
-    <div class="row mt-2 pb-3 mb-5 border-bottom">
-      <div class="col-md-2 offset-md-1">
-        <% if customer_signed_in? %>
-          <% if post.favorited_by?(current_customer) %>
-            <span><%= post.favorites.count %>:</span>
-            <%= link_to post_favorites_path(post), method: :delete do %>
-              <i class="fas fa-thumbs-up"></i>いいね済
+      <div class="row mt-2 pb-3 mb-5 border-bottom">
+        <div class="col-md-2 offset-md-1">
+          <% if customer_signed_in? %>
+            <% if post.favorited_by?(current_customer) %>
+              <span><%= post.favorites.count %>:</span>
+              <%= link_to post_favorites_path(post), method: :delete do %>
+                <i class="fas fa-thumbs-up"></i>いいね済
+              <% end %>
+            <% else %>
+              <span><%= post.favorites.count %>:</span>
+              <%= link_to post_favorites_path(post), method: :post do %>
+                <i class="far fa-thumbs-up"></i>いいね!
+              <% end %>
             <% end %>
           <% else %>
             <span><%= post.favorites.count %>:</span>
@@ -61,29 +76,24 @@
               <i class="far fa-thumbs-up"></i>いいね!
             <% end %>
           <% end %>
-        <% else %>
-          <span><%= post.favorites.count %>:</span>
-          <%= link_to post_favorites_path(post), method: :post do %>
-            <i class="far fa-thumbs-up"></i>いいね!
-          <% end %>
-        <% end %>
-      </div><%#いいねボタン%>
-      <div class="col-md-4">
-        <%= post.post_comments.count %>:
-        <% if customer_signed_in? %>
-          <% if post.post_comments.exists?(customer_id: current_customer.id) %>
-            <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+        </div><%#いいねボタン%>
+        <div class="col-md-4">
+          <%= post.post_comments.count %>:
+          <% if customer_signed_in? %>
+            <% if post.post_comments.exists?(customer_id: current_customer.id) %>
+              <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+            <% else %>
+              <%= link_to new_post_post_comments_path(post.id) do %>
+                <i class="far fa-comment"></i>コメントする
+              <% end %>
+            <% end %>
           <% else %>
-            <%= link_to new_post_post_comments_path(post.id) do %>
+            <%= link_to new_post_post_comments_path(post) do %>
               <i class="far fa-comment"></i>コメントする
             <% end %>
           <% end %>
-        <% else %>
-          <%= link_to new_post_post_comments_path(post) do %>
-            <i class="far fa-comment"></i>コメントする
-          <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>

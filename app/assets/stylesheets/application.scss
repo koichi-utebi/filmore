@@ -15,10 +15,15 @@
  */
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 
- * {
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+main {
+  min-height: 100vh;
 }
 
 #error_explanation {
@@ -35,6 +40,14 @@ header {
   background: #ebf6f7;
   position: relative;
   z-index: 10;
+}
+
+.header-search-form {
+  width: 90%;
+}
+
+.logo img {
+  width: 220px;
 }
 
 .field_with_errors {

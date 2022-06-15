@@ -41,13 +41,16 @@
         <%= render 'public/post_comments/btn', post: @post %> <%# コメントボタン %>
         <div class="col-md-2 offset-md-2 pb-3">
         <% if @customer == current_customer %>
-          <div class="float-right">
+          <div class="float-right d-inline-flex">
             <%= link_to edit_post_path, class: "text-success text-decoration-none" do %>
               <i class="fas fa-edit"></i>
             <% end %>
             |
-            <%= link_to post_path, method: :delete, class: "text-danger text-decoration-none" do %>
-              <i class="fas fa-trash-alt"></i>
+            <%= form_with model: @post, url: post_path(@post), method: :patch do |f| %>
+              <%= f.hidden_field :is_active, :value => false %>
+              <%= f.button :type => "submit", style: "border-style: none; background: transparent;" do %>
+                <i class="fas fa-trash text-danger"></i>
+              <% end %>
             <% end %>
           </div>
         <% end %>

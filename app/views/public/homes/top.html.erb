@@ -1,30 +1,33 @@
+<div class="top-image">
+  <div class="top-text text-center">
+    <h1 class="font-weight-bold">映画のレビューサイト</h1>
+    <%= image_tag 'logo.png', class: "" %>
+    <h3 class="mt-1 font-weight-bold">-感想を共有して映画好きな人とつながろう！-</h3>
+  </div>
+</div>
+
 <div class="container">
-  <%= render 'layouts/flash_message' %>
   <div class="row">
-    <div class="col-md-8 mx-auto pt-5">
-      <h1 class="text-center">ようこそFIMOREへ!!</h1>
+    <div class="col-md-12 mt-3 pt-4 pb-3 top-main-title">
+      <h2 class="text-center font-weight-bold">今話題の映画</h2>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4 mx-auto pt-5">
-      <h4 class="text-center">今話題の映画</h4>
-    </div>
-  </div>
-
-  <div class="row">
+  <div class="row col-md-12 mx-auto">
     <% @movies.each do |movie| %>
-    <div class="col-md-3 mt-3">
+    <div class="col-lg-3 col-sm-6 mt-3 top-poster">
       <%= link_to movie_path(movie['id']) do %>
-        <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded", size: '260x390'%>
+        <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded" %>
       <% end %>
     </div>
     <% end %>
   </div>
 
   <div class="row">
-    <div class="col-md-4 mx-auto pt-5 pb-5">
-      <%= link_to "→映画一覧を見る", movies_path, class: "btn btn-outline-primary w-100 text-center" %>
+    <div class="col-md-4 mx-auto pt-5 pb-5 text-center">
+      <%= link_to movies_path, class: "btn btn-outline-primary px-4 text-center" do %>
+        <i class="fas fa-film"></i> 映画一覧を見る
+      <% end %>
     </div>
   </div>
 </div>

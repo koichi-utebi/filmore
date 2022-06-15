@@ -42,13 +42,18 @@
       </div>
 
       <div class="pt-2">
-        <h5>投稿ステータス</h5>
         <%= form_with model: @post, url: admin_post_path, method: :patch do |f| %>
+
+          <h5>投稿ステータス</h5>
           <%= f.radio_button :is_active, true, class: "" %>
           <%= f.label :is_active, "有効", class: "" %>
           <%= f.radio_button :is_active, false, class: "ml-2" %>
           <%= f.label :is_active, "無効", class: "" %>
 
+          <div class="col-md-4 mx-auto form-group text-center text-danger">
+            <%= f.check_box :spoiler %>
+            <%= f.label :spoiler, "ネタバレを含む" %>
+          </div>
           <div class="col-md-4 offset-md-4 form-group">
             <%= f.submit "変更", class: "btn btn-outline-success w-100" %>
           </div>

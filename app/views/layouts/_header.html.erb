@@ -1,20 +1,22 @@
 <header class="">
   <nav class="navbar navbar-expand-lg navbar-light p-3">
     <div class="container-fluid">
-      <div class="col-md-2">
-        <a class="navbar-brand" href="/"><h1>FILMORE</h1></a> <%#サイトロゴ%>
+      <div class="col-md-3 col-xs-12 logo text-center">
+        <a class="navbar-brand" href="/">
+          <%= image_tag 'logo.png' %>
+        </a> <%#サイトロゴ%>
       </div>
-      <div class="col-md-7 ">
-        <%= form_with url: search_path, method: :get, class: "form-inline d-flex justify-content-end" do |f| %>
-          <%= f.search_field :looking_for, placeholder: '映画のタイトル', class: "form-control w-75" %>
-          <%= f.button :type => "submit", class: "btn btn-outline-primary" do %>
+      <div class="col-md-6">
+        <%= form_with url: search_path, method: :get, class: "form-inline d-flex justify-content-center" do |f| %>
+          <%= f.search_field :looking_for, placeholder: '映画のタイトル', class: "form-control", style: "width: 80%" %>
+          <%= f.button :type => "submit", class: "btn btn-primary" do %>
             <i class="fas fa-search"></i>
           <% end %>
         <% end %>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       <div class="col-md-3 colapse navbar-collapse" id="navbarNavDropdown">
         <% if admin_signed_in? %> <%#管理者ログインしている場合%>
         <div class="d-flex flex-column ml-auto">

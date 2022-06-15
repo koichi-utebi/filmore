@@ -38,7 +38,8 @@
             <h3 class="show-tab-title pt-3 pl-4">
               フォロー中: <%= @customer_followings.count %>
             </h3>
-            <%= render 'public/relationships/index', customer: @customer_followings %>
+            <span class="ff-tag-explanation"><i class="fas fa-people-arrows"></i></span>：相互フォロー
+            <%= render 'public/relationships/index', customer: @customer_followings, obj: @customer_followers %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               フォローしているアカウントがありません
@@ -51,7 +52,8 @@
             <h3 class="show-tab-title pt-3 pl-4">
               フォロワー数: <%= @customer_followers.count %>
             </h3>
-            <%= render 'public/relationships/index', customer: @customer_followers %>
+            <span class="ff-tag-explanation"><i class="fas fa-people-arrows"></i></span>：相互フォロー
+            <%= render 'public/relationships/index', customer: @customer_followers, obj: @customer_followings %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               フォローされているアカウンがありません
@@ -64,11 +66,7 @@
             <h3 class="show-tab-title pt-3 pl-4">
               視聴済みリスト<small>(全<%=@watched_lists.count%>件)</small>
             </h3>
-            <div class="col-md-6 offset-md-1">
-              <i class="fas fa-star fa-2x star"></i>: また観たい！
-              <i class="fas fa-pen fa-2x pen"></i>: レビュー済み
-            </div>
-            <%= render 'public/watched_lists/index', lists: @watched_lists, obj: @wish_lists %>
+            <%= render 'public/watched_lists/index', lists: @watched_lists, obj: @wish_lists, posts: @posts %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               リストに映画がありません
@@ -81,11 +79,7 @@
             <h3 class="show-tab-title pt-3 pl-4">
               ウィッシュリスト<small>(全<%= @wish_lists.count %>件)</small>
             </h3>
-            <div class="col-md-6 offset-md-1 show-icon-explain">
-              <span><i class="fas fa-star fa-2x star"></i>: また観たい！</span>
-              <span><i class="fas fa-pen fa-2x pen"></i>: レビュー済み</span>
-            </div>
-            <%= render 'public/watched_lists/index', lists: @wish_lists, obj: @watched_lists %>
+            <%= render 'public/watched_lists/index', lists: @wish_lists, obj: @watched_lists, posts: @posts %>
           <% else %>
             <h3 class="border-bottom pt-3 pb-3 pl-4">
               リストに映画がありません

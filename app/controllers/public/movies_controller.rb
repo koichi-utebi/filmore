@@ -13,7 +13,7 @@ class Public::MoviesController < Public::ApplicationController
 
   def show
     @movie = Movie.details(params[:id])#映画詳細情報を取得
-    @posts = Post.where(movie_id: @movie['id']).latest.page(params[:page]).per(10)#投稿されたレビューのうち該当の映画に関するレビューのみを取り出す
+    @posts = Post.where(movie_id: @movie['id'], is_active: true).latest.page(params[:page]).per(10)#投稿されたレビューのうち該当の映画に関するレビューのみを取り出す
     @post = Post.new#レビューの新規投稿、パラメーターをposts#newページに渡す
     @watched_list = WatchedList.new#視聴済みリストへの追加、watched_lists#createへparamsを渡す
     @wish_list = WishList.new#ウィッシュリストへの追加、wish_lists#createへparamsを渡す

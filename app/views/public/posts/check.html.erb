@@ -44,7 +44,7 @@
   </div>
 
   <div class="row mb-5 mt-3">
-    <div class="col-md-4 offset-md-4">
+    <div class="col-md-4 offset-md-4 text-center">
       <%= form_with model: @post, url: posts_path, method: :post do |f| %>
         <%= f.hidden_field :movie_id %>
         <%= f.hidden_field :review_title %>
@@ -54,7 +54,9 @@
         <%= f.hidden_field :rate %>
         <%= f.hidden_field :title %>
         <%= f.hidden_field :poster_path %>
-        <%= f.submit "公開する", class: 'btn btn-outline-primary w-100' %>
+        <%= f.check_box :spoiler %>
+        <%= f.label :spoiler, "ネタバレを含む", class: "text-danger" %>
+        <%= f.submit "公開する", class: 'btn btn-outline-primary w-75' %>
       <% end %>
     </div>
   </div>

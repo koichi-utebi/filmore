@@ -19,16 +19,16 @@ class Customer < ApplicationRecord
 
   scope :latest, -> {order(created_at: :desc)}
 
-  def follow(user_id)
-    relationships.create(followed_id: user_id)
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
   end
 
-  def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
   end
 
-  def following?(user)
-    followings.include?(user)
+  def following?(customer)
+    followings.include?(customer)
   end
 
   def get_profile_image
