@@ -38,34 +38,55 @@
 }
 
 .about-bg {
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
   background-image: url('theator.jpeg');
   background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .about-contents {
-  width: 50%;
-  height: 50%;
-  margin: auto;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .about-contents img {
-  width: 60%;
+  width: 40%;
+  margin-top: 10%;
 }
+
+.about-contents h2 {
+  font-size: 2vw;
+}
+
 
 .about-text {
   display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .text {
   width: 30%;
+  height: 30%;
   margin: 1%;
   padding: 2% 0;
   background: #ebf6f7;
   border-radius: 10px;
+  font-size: 1vw;
+}
+
+.text h3 {
+  font-size: 1.5vw;
+}
+
+.about-small-contents {
+  display: none;
 }
 
 @media screen and (max-width: 959px) {
@@ -101,6 +122,16 @@
     height: auto;
   }
 
+  .about-contents img {
+    width: 60%;
+    margin-top: 0;
+  }
+  .about-contents h2 {
+    font-size: 3vw;
+  }
+  .text h3 {
+    font-size: 2vw;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -122,4 +153,31 @@
 	.top-text h3 {
 	  font-size: 18px;
 	}
+
+	.about-bg {
+	  min-height: 0;
+    height: 260px;
+    width: 100%;
+    background-image: url('theator.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    display: flex;
+  }
+  .about-contents {
+    height: 60px;
+  }
+
+  .about-contents h2 {
+    display: none;
+  }
+
+  .about-text {
+    display: none;
+  }
+
+  .about-small-contents {
+    display: block;
+  }
+
 }
