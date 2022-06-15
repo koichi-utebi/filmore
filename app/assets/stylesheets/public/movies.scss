@@ -10,9 +10,16 @@
 
 
 .index-content-area {
-  height: 315px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.index-content-area img {
+  width: 100%;
+}
+
+.index-small-genres {
+  display: none;
 }
 
 .show-poster-img {
@@ -30,4 +37,17 @@
 
 .show-list-links p {
   font-size:  0.8rem;
+}
+
+@media screen and (max-width: 992px) {
+  .index-side-bar {
+    display: none;
+  }
+
+  .index-small-genres {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
 }
