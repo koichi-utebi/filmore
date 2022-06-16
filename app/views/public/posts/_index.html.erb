@@ -23,7 +23,7 @@
         </div><%#映画タイトル%>
 
         <div class="row pt-2">
-          <div class="col-md-12 d-inline-flex align-items-center">
+          <div class="col-md-12 d-inline-flex align-items-center index-review-title">
             <%= link_to customer_path(post.customer_id) do %>
               <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
             <% end %>

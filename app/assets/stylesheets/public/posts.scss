@@ -18,10 +18,20 @@
 .index-title{
   border-bottom: double;
 }
+
 @media screen and (max-width: 480px) {
 
   .index-movie-title h4 {
     font-size: 18px;
+  }
+
+  .index-review-title h5 {
+    font-size: 15px;
+  }
+
+  .index-review-title img {
+    height: 50px !important;
+    width: 50px !important;
   }
 
   .index-spoiler-review h5 {
