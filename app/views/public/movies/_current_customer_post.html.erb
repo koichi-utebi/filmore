@@ -7,12 +7,10 @@
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-1 mr-3">
+        <div class="col-md-12 mr-3 d-inline-flex">
           <%= link_to customer_path(current_customer.id) do %>
             <%= image_tag current_customer.get_profile_image, class: "rounded-circle", size:'60x60' %>
           <% end %>
-        </div>
-        <div class="col-md-10 pt-2">
           <p>
             <%= link_to post_path(post) do %>
               <%= post.review_title %>
@@ -21,11 +19,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10 offset-md-1 d-inline-flex ">
-          <div id="current-customer-rate-<%= post.id %>" class="form-group"></div><p class="mt-1 ml-1"><%= post.rate %>点</p>
-          <div class="ml-4">
+        <div class="col-md-8 offset-md-1 ">
+          <div class="">
             <p class="text-muted mt-1"><%= current_customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
           </div>
+        </div>
+        <div class="col-md-4 offset-md-1 d-inline-flex">
+          <div id="current-customer-rate-<%= post.id %>" class="form-group"></div><p class="mt-1 ml-1"><%= post.rate %>点</p>
           <script>
           $(document).on('turbolinks:load', function() {
             $('#current-customer-rate-<%= post.id %>').empty();

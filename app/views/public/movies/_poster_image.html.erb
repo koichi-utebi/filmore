@@ -1,7 +1,7 @@
 <div class="show-poster-img">
-  <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'],class: "rounded mb-3", size: '300x450'%><br/>
+  <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'],class: "rounded mb-3 poster-img"%><br/>
   <% if posts.present? %>
-  <div class="d-inline-flex ml-5">
+  <div class="col-lg-3 col-12 show-avg-score">
     <div class="form-group" id="rate-avg"></div>
     <h5 class=" ml-4 mt-1"><%= posts.average(:rate) %>点</h5>
   </div>

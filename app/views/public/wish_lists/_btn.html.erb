@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-lg-4 col-md-6 col-sm-7 col-6">
   <% if WishList.exists?(movie_id: movie['id'], customer_id: current_customer.id) %>
     <%= link_to wish_list_path(movie['id']), method: :delete, class: "text-decoration-none" do %>
       <i class="fas fa-tasks fa-2x"></i>

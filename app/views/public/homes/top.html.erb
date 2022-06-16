@@ -1,4 +1,5 @@
 <div class="top-image">
+  <%= render 'layouts/flash_message' %>
   <div class="top-text text-center">
     <h1 class="font-weight-bold">映画のレビューサイト</h1>
     <%= image_tag 'logo.png', class: "" %>
@@ -8,14 +9,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 mt-3 pt-4 pb-3 top-main-title">
+    <div class="col-md-12 mt-3 top-main-title">
       <h2 class="text-center font-weight-bold">今話題の映画</h2>
     </div>
   </div>
 
-  <div class="row col-md-12 mx-auto">
+  <div class="row col-12 mx-auto">
     <% @movies.each do |movie| %>
-    <div class="col-lg-3 col-sm-6 mt-3 top-poster">
+    <div class="col-6 col-lg-3 mt-3 top-poster">
       <%= link_to movie_path(movie['id']) do %>
         <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded" %>
       <% end %>

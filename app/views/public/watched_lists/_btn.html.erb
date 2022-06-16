@@ -1,4 +1,4 @@
-<div class="col-md-3 offset-md-1 pl-4">
+<div class="col-lg-3 offset-lg-1 col-md-5 col-sm-7 col-6">
   <% if WatchedList.exists?(movie_id: movie['id'], customer_id: current_customer.id) %>
     <%= link_to watched_list_path(movie['id']), method: :delete, class: "text-decoration-none" do %>
       <i class="fas fa-eye fa-2x text-primary"></i>

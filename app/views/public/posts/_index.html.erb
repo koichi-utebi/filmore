@@ -3,7 +3,7 @@
     <div class="mb-5">
       <% posts.each do |post| %>
       <div class="row border-bottom">
-        <div class="col-md-3 pt-5">
+        <div class="col-md-3 col-6 mx-auto pt-5">
           <div class="show-movie-poster">
             <%= image_tag 'https://image.tmdb.org/t/p/w1280' + post.poster_path, class: "rounded mb-3"%><br/>
           </div>
@@ -12,7 +12,7 @@
         <div class="col-md-9">
 
         <div class="row pt-2">
-          <div class="col-md-10 offset-md-1 d-inline-flex">
+          <div class="col-md-10 offset-md-1 d-inline-flex index-movie-title">
             <h4>
             <%= link_to movie_path(post.movie_id) do %>
               "<%= post.title %>"
@@ -23,13 +23,11 @@
         </div><%#映画タイトル%>
 
         <div class="row pt-2">
-          <div class="col-md-1">
+          <div class="col-md-12 d-inline-flex align-items-center">
             <%= link_to customer_path(post.customer_id) do %>
               <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
             <% end %>
-          </div>
-          <div class="col-md-10">
-            <h5>
+            <h5 class="ml-3">
               <%= link_to post_path(post) do %>
                 <%= post.review_title %>
               <% end %>
@@ -38,10 +36,12 @@
         </div><%#レビュータイトル%>
 
         <div class="col-md-10 offset-md-1 d-inline-flex">
-          <div id="rate-<%= post.id %>" class="form-group"></div><p class="ml-1"><%= post.rate %>点</p>
-          <div class="ml-4">
+          <div class="">
             <p class="text-muted text-small"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
           </div>
+        </div>
+        <div class="col-md-10 offset-md-1 d-inline-flex" >
+          <div id="rate-<%= post.id %>" class="form-group"></div><p class="ml-1"><%= post.rate %>点</p>
           <script>
           $(document).on('turbolinks:load', function() {
             $('#rate-<%= post.id %>').empty();
@@ -59,7 +59,7 @@
         </div><%#星評価%>
 
         <% if post.spoiler == true %>
-          <div class="col-md-6 offset-md-2 mt-2 mb-3 text-center">
+          <div class="col-md-12 mt-2 mb-3 text-center index-spoiler-review">
             <%= link_to post_path(post), class: "text-decoration-none text-danger" do %>
               <h5>!このレビューはネタバレを含みます!</h5>
             <% end %>

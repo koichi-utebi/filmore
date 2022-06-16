@@ -18,3 +18,13 @@
 .index-title{
   border-bottom: double;
 }
+@media screen and (max-width: 480px) {
+
+  .index-movie-title h4 {
+    font-size: 18px;
+  }
+
+  .index-spoiler-review h5 {
+    font-size: 15px;
+  }
+}

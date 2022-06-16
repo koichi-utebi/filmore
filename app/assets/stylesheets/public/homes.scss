@@ -29,6 +29,7 @@
               -2px 2px 0 #000,
               2px -2px 0 #000,
               -2px -2px 0 #000;
+  line-height: 100px;
 }
 
 .top-poster img {
@@ -91,6 +92,11 @@
 
 @media screen and (max-width: 959px) {
   /* 959px以下に適用されるCSS（タブレット用） */
+  .top-image {
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
   .top-image::after {
     content: '';
     background-color: rgba(255, 255, 255, 0.5);
@@ -99,7 +105,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 600px;
+    height: auto;
+    aspect-ratio: 2/1;
   }
 
   .top-text {
@@ -111,7 +118,15 @@
   }
 
   .top-text img {
-    width: 80%;
+    width: 60%;
+  }
+
+  .top-text h1 {
+    font-size: 4vw;
+  }
+
+  .top-text h3 {
+    font-size: 3vw;
   }
 
   .top-main-title {
@@ -139,20 +154,30 @@
 
   .top-image {
     height: 220px;
+    aspect-ratio: auto;
+  }
+
+  .top-image::after {
+    height: 220px;
+    aspect-ratio: auto;
   }
 
 	.top-text {
 	  width: 100%;
 	  left: 0;
-	  top: 5%;
+	  top: 20%;
 	}
 	.top-text h1{
-	  font-size: 30px;
+	  font-size: 5vw;
 	}
 
 	.top-text h3 {
-	  font-size: 18px;
+	  font-size: 4vw;
 	}
+
+  .top-main-title h2 {
+    font-size: 5vw;
+  }
 
 	.about-bg {
 	  min-height: 0;

@@ -1,15 +1,15 @@
-<div class="container-fluid col-12 pb-5">
+<div class="container-fluid col-md-12 col-10 mx-auto pb-5">
   <div class="row pt-5">
 
     <div class="col-lg-2 offset-lg-1 col-sm-0">
       <%= render 'side_bar', genres: @genres %>
     </div>
 
-    <div class="col-lg-8 col-sm-12 main-contents pr-5">
+    <div class="col-lg-8 col-12 main-contents">
       <h2 class="text-center">公開中の映画</h2>
       <div class="index-small-genres">
         <%= form_with model: @genre, url: genre_search_path, method: :get, class: "form-inline d-flex justify-content-center" do |f| %>
-          <%= f.select :genre, options_from_collection_for_select(Genre.all, :id, :name), {}, class: "form-control", style: "width: 250px"%>
+          <%= f.select :genre, options_from_collection_for_select(Genre.all, :id, :name), {}, class: "form-control", style: "width: 200px"%>
           <%= f.button :type => 'submit', class: "btn btn-primary" do %>
             <i class="fas fa-search"></i>
           <% end %>

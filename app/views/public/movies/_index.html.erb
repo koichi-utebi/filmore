@@ -1,11 +1,11 @@
 <% movies.each do |movie| %>
 <div class="row mt-3 pb-3 border-bottom index-content-area">
-  <div class="col-sm-3">
+  <div class="col-sm-3 col-8 mx-auto pb-3">
     <%= link_to movie_path(movie['id']) do %>
       <%= image_tag "https://image.tmdb.org/t/p/w1280#{movie["poster_path"]}",class: "rounded"%>
     <% end %>
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-9 index-movie-detail">
     <h5><%= link_to movie['title'], movie_path("#{movie['id']}") %></h5>
     <p><%= movie['release_date'] %></p>
     <% if movie['overview'].present? %>
