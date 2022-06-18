@@ -2,79 +2,86 @@
   <div class="col-md-12">
     <div class="mb-5">
       <% posts.each do |post| %>
-      <div class="row border-bottom">
-        <div class="col-md-3 col-6 mx-auto pt-5">
-          <div class="show-movie-poster">
-            <%= image_tag 'https://image.tmdb.org/t/p/w1280' + post.poster_path, class: "rounded mb-3"%><br/>
+      <% if post.is_active == true %>
+        <div class="row border-bottom">
+          <div class="col-md-3 col-6 mx-auto pt-5">
+            <div class="show-movie-poster">
+              <%= image_tag 'https://image.tmdb.org/t/p/w1280' + post.poster_path, class: "rounded mb-3"%><br/>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-9 col-12">
+          <div class="col-md-9 col-12">
 
-        <div class="row pt-2">
-          <div class="col-md-10 offset-md-1 col-12 d-inline-flex index-movie-title">
-            <h4>
-            <%= link_to movie_path(post.movie_id) do %>
-              "<%= post.title %>"
-            <% end %>
-            のレビュー
-            </h4>
-          </div>
-        </div><%#映画タイトル%>
-
-        <div class="row pt-2">
-          <div class="col-md-12 d-inline-flex align-items-center index-review-title">
-            <%= link_to customer_path(post.customer_id) do %>
-              <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
-            <% end %>
-            <h5 class="ml-3">
-              <%= link_to post_path(post) do %>
-                <%= post.review_title %>
+          <div class="row pt-2">
+            <div class="col-md-10 offset-md-1 col-12 d-inline-flex index-movie-title">
+              <h4>
+              <%= link_to movie_path(post.movie_id) do %>
+                "<%= post.title %>"
               <% end %>
-            </h5>
-          </div>
-        </div><%#レビュータイトル%>
+              のレビュー
+              </h4>
+            </div>
+          </div><%#映画タイトル%>
 
-        <div class="col-md-10 offset-md-1 col-12 d-inline-flex">
-          <div class="">
-            <p class="text-muted text-small"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
+          <div class="row pt-2">
+            <div class="col-md-12 d-inline-flex align-items-center index-review-title">
+              <%= link_to customer_path(post.customer_id) do %>
+                <%= image_tag post.customer.get_profile_image, class: "rounded-circle",size: "80x80" %>
+              <% end %>
+              <h5 class="ml-3">
+                <%= link_to post_path(post) do %>
+                  <%= post.review_title %>
+                <% end %>
+              </h5>
+            </div>
+          </div><%#レビュータイトル%>
+
+          <div class="col-md-10 offset-md-1 col-12 d-inline-flex">
+            <div class="">
+              <p class="text-muted text-small"><%= post.customer.name %>さん | <%= post.watched_data.strftime('%Y年%m月%d日') %> | <%= post.way_to_watch_i18n %></p>
+            </div>
           </div>
-        </div>
-        <div class="col-md-10 offset-md-1 d-inline-flex" >
-          <div id="rate-<%= post.id %>" class="form-group"></div><p class="ml-1"><%= post.rate %>点</p>
-          <script>
-          $(document).on('turbolinks:load', function() {
-            $('#rate-<%= post.id %>').empty();
-            $('#rate-<%= post.id %>').raty({
-              size: 36,
-              starOff:  '<%= asset_path('star-off.png') %>',
-              starOn : '<%= asset_path('star-on.png') %>',
-              starHalf: '<%= asset_path('star-half.png') %>',
-              half: true,
-              readOnly: true,
-              score: <%= post.rate %>,
+          <div class="col-md-10 offset-md-1 d-inline-flex" >
+            <div id="rate-<%= post.id %>" class="form-group"></div><p class="ml-1"><%= post.rate %>点</p>
+            <script>
+            $(document).on('turbolinks:load', function() {
+              $('#rate-<%= post.id %>').empty();
+              $('#rate-<%= post.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: <%= post.rate %>,
+              });
             });
-          });
-          </script>
-        </div><%#星評価%>
+            </script>
+          </div><%#星評価%>
 
-        <% if post.spoiler == true %>
-          <div class="col-md-12 mt-2 mb-3 text-center index-spoiler-review">
-            <%= link_to post_path(post), class: "text-decoration-none text-danger" do %>
-              <h5>!このレビューはネタバレを含みます!</h5>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="col-md-10 offset-md-1 mt-2">
-              <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
-          </div><%#レビュー内容%>
-          <div class="row mt-2 pb-3">
-            <div class="col-md-2 offset-md-2">
-              <% if customer_signed_in? %>
-                <% if post.favorited_by?(current_customer) %>
-                  <span><%= post.favorites.count %>:</span>
-                  <%= link_to post_favorites_path(post), method: :delete do %>
-                    <i class="fas fa-thumbs-up"></i>いいね済
+          <% if post.spoiler == true %>
+            <div class="col-md-12 mt-2 mb-3 text-center index-spoiler-review">
+              <%= link_to post_path(post), class: "text-decoration-none text-danger" do %>
+                <h5>!このレビューはネタバレを含みます!</h5>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="col-md-10 offset-md-1 mt-2">
+                <p><%= safe_join(post.review_body.split("\n"),tag(:br)) %></p>
+            </div><%#レビュー内容%>
+            <div class="row mt-2 pb-3">
+              <div class="col-md-2 offset-md-2">
+                <% if customer_signed_in? %>
+                  <% if post.favorited_by?(current_customer) %>
+                    <span><%= post.favorites.count %>:</span>
+                    <%= link_to post_favorites_path(post), method: :delete do %>
+                      <i class="fas fa-thumbs-up"></i>いいね済
+                    <% end %>
+                  <% else %>
+                    <span><%= post.favorites.count %>:</span>
+                    <%= link_to post_favorites_path(post), method: :post do %>
+                      <i class="far fa-thumbs-up"></i>いいね!
+                    <% end %>
                   <% end %>
                 <% else %>
                   <span><%= post.favorites.count %>:</span>
@@ -82,33 +89,28 @@
                     <i class="far fa-thumbs-up"></i>いいね!
                   <% end %>
                 <% end %>
-              <% else %>
-                <span><%= post.favorites.count %>:</span>
-                <%= link_to post_favorites_path(post), method: :post do %>
-                  <i class="far fa-thumbs-up"></i>いいね!
-                <% end %>
-              <% end %>
-            </div><%#いいねボタン%>
-            <div class="col-md-4">
-              <%= post.post_comments.count %>:
-              <% if customer_signed_in? %>
-                <% if post.post_comments.exists?(customer_id: current_customer.id) %>
-                  <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+              </div><%#いいねボタン%>
+              <div class="col-md-4">
+                <%= post.post_comments.count %>:
+                <% if customer_signed_in? %>
+                  <% if post.post_comments.exists?(customer_id: current_customer.id) %>
+                    <i class="fas fa-comment text-primary"></i><span class="text-primary">コメント済み</span>
+                  <% else %>
+                    <%= link_to new_post_post_comments_path(post.id) do %>
+                      <i class="far fa-comment"></i>コメントする
+                    <% end %>
+                  <% end %>
                 <% else %>
-                  <%= link_to new_post_post_comments_path(post.id) do %>
+                  <%= link_to new_post_post_comments_path(post) do %>
                     <i class="far fa-comment"></i>コメントする
                   <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to new_post_post_comments_path(post) do %>
-                  <i class="far fa-comment"></i>コメントする
-                <% end %>
-              <% end %>
-            </div><%#コメントボタン%>
-        </div><%#いいね、コメントボタン%>
-        <% end %>
+              </div><%#コメントボタン%>
+          </div><%#いいね、コメントボタン%>
+          <% end %>
+          </div>
         </div>
-      </div>
+        <% end %>
       <% end %>
     </div>
   </div>
