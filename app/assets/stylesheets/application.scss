@@ -118,29 +118,57 @@ header {
   position: relative;
 }
 
+.sign-in-text {
+  font-family: Chalkduster;
+  color: white;
+  width: 550px;
+  position: absolute;
+  top: 100px;
+  left: 5%;
+}
+
+.sign-in-text h3 {
+  line-height: 2em;
+}
+
 .sign-in-form {
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.8);
   position: absolute;
   top: 200px;
-  right: 10%;
+  right: 15%;
   bottom: 0;
   height: 380px;
   width: 570px;
   padding: 20px;
+  border-radius: 10px;
+}
+
+.sign-up-bg {
+  background-image: url('films.jpeg');
+  background-size: cover;
+  background-position: center;
 }
 
 .sign-up-form {
   height: 100vh;
+  background: rgba(255,255,255,0.8);
+  padding-top: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 991px) {
   .sign-in-form {
-    background: rgba(255,255,255,0.8);
     position: relative;
     height: 380px;
     width: 80%;
     margin: 0 auto;
     right: 0;
+  }
+
+  .sign-in-text {
+    display: none;
   }
 }
 
