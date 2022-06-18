@@ -109,12 +109,48 @@ header {
   z-index: 1;
 }
 
+.sign-in-bg {
+  height: 100vh;
+  width: 100%;
+  background-image: url('clapperboard.jpeg');
+  background-size: cover;
+  background-position: left;
+  position: relative;
+}
+
+.sign-in-form {
+  background: rgba(255,255,255,0.5);
+  position: absolute;
+  top: 200px;
+  right: 10%;
+  bottom: 0;
+  height: 380px;
+  width: 570px;
+  padding: 20px;
+}
+
+.sign-up-form {
+  height: 100vh;
+}
+
 @media screen and (max-width: 959px) {
-  main {
-    min-height: 0;
+  .sign-in-form {
+    background: rgba(255,255,255,0.8);
+    position: relative;
+    height: 380px;
+    width: 80%;
+    margin: 0 auto;
+    right: 0;
   }
 }
 
 @media screen and (max-width: 480px) {
-  min-height: 0;
+  .sign-in-form {
+    top: 10%;
+    width: 90%;
+  }
+
+  .sign-in-form h2 {
+    font-size: 20px;
+  }
 }
