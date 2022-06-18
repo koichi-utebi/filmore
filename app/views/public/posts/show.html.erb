@@ -51,6 +51,12 @@
               <% end %>
             <% end %>
           </div>
+        <% else admin_signed_in? %>
+          <div class="text-center">
+            <%= link_to edit_admin_post_path, class: "text-success text-decoration-none" do %>
+            <i class="fas fa-edit"></i>
+            <% end %>
+          </div>
         <% end %>
         </div><%#編集、削除ボタン%>
       </div>

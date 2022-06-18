@@ -1,23 +1,25 @@
-<div class="col-md-6 offset-md-1">
+<div class="col-md-6 offset-md-1 mb-2 mt-2">
   <i class="fas fa-star fa-2x star"></i>: また観たい！
   <i class="fas fa-pen fa-2x pen"></i>: レビュー済み
 </div>
-<% lists.each do |list| %>
 <div class="row d-inline-flex">
-  <div class="m-4 list-poster-image">
-    <%= link_to movie_path(list.movie_id) do %>
-      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + list.poster_path, class: "rounded mb-3", size: '300x450'%>
-    <% end %>
-    <% if obj.exists?(movie_id: list.movie_id) %>
-      <div class="list-tag">
-        <i class="fas fa-star fa-2x"></i>
+  <% lists.each do |list| %>
+    <div class="col-md-3 col-6 list-poster-image">
+      <%= link_to movie_path(list.movie_id) do %>
+        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + list.poster_path, class: "rounded mb-3"%>
+      <% end %>
+      <div class="list-poster-tag">
+        <% if obj.exists?(movie_id: list.movie_id) %>
+          <div class="list-tag">
+            <i class="fas fa-star fa-2x"></i>
+          </div>
+        <% end %>
+        <% if posts.exists?(movie_id: list.movie_id) %>
+          <div class="post-tag">
+            <i class="fas fa-pen fa-2x"></i>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-    <% if posts.exists?(movie_id: list.movie_id) %>
-      <div class="post-tag">
-        <i class="fas fa-pen fa-2x"></i>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
-<% end %>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row pb-5">
     <div class="col-md-8 offset-md-2 pt-4 pb-2">
       <% if @word != nil %>
@@ -7,14 +7,12 @@
         <h3 class="text-center">投稿一覧</h3>
       <% end %>
     </div>
-    <div class="col-md-4 offset-md-2">
+    <div class="col-lg-4 offset-lg-2 col-sm-6 mb-3">
       <%= render 'admin/shared/search', link: admin_post_search_path %><%#投稿検索%>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4 col-sm-6 mb-3">
       <%= render 'admin/shared/sort', link: admin_post_sort_path %><%#並び替え%>
     </div>
-    <div class="col-md-12 mt-2">
-      <%= render 'index', posts: @posts %><%#投稿一覧%>
-    </div>
+    <%= render 'index', posts: @posts %><%#投稿一覧%>
   </div>
 </div>

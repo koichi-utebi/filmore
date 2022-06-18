@@ -1,0 +1,55 @@
+<div class="text-center mt-3 pb-3">
+  <%= image_tag customer.get_profile_image, class: "rounded-circle", size: "150x150" %>
+</div>
+<div class="text-center pd-3">
+  <h5><%= customer.name %></h5>
+</div>
+<div class="text-center pd-3">
+  <span>
+    <%= customer.followings.count %>:フォロー |
+    <%= customer.followers.count %>:フォロワー
+  </span>
+</div>
+
+<% if customer_signed_in? %>
+  <% if customer == current_customer %>
+    <div class="text-center mt-2 mb-2">
+      <%= link_to edit_customer_path, class: "text-success text-decoration-none" do %>
+        <i class="fas fa-user-edit fa-2x"></i>プロフィール編集
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center mt-2 mb-2">
+      <% if current_customer.following?(customer) %>
+        <%= link_to customer_relationships_path(customer.id), method: :delete, class: "text-primary text-decoration-none" do %>
+          <i class="fas fa-user-check fa-2x"></i>フォロー済
+        <% end %>
+      <% else %>
+        <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary text-decoration-none" do %>
+          <i class="fas fa-user-plus fa-2x"></i>フォロー
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% elsif admin_signed_in? %>
+  <div class="text-center mt-2 mb-2">
+    <%= link_to edit_admin_customer_path, class: "text-success text-decoration-none" do %>
+      <i class="fas fa-user-edit fa-2x"></i>プロフィール編集
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center mt-2 mb-2">
+    <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary text-decoration-none" do %>
+      <i class="fas fa-user-plus fa-2x"></i>フォロー
+    <% end %>
+  </div>
+<% end %>
+
+<ul id="tab-menu">
+  <li><a href="#tab1" class="active"><i class="fas fa-pen"></i></a></li>
+  <li><a href="#tab2" class=""><i class="fas fa-thumbs-up"></i></a></li>
+  <li><a href="#tab3" class=""><i class="fas fa-user-check"></i></a></li>
+  <li><a href="#tab4" class=""><i class="fas fa-users"></i></a></li>
+  <li><a href="#tab5" class=""><i class="fas fa-video"></i></a></li>
+  <li><a href="#tab6" class=""><i class="fas fa-film"></i></a></li>
+</ul><%#タブメニュー%>
