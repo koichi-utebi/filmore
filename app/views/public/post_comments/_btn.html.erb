@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-5">
   <%= post.post_comments.count %>:
   <% if customer_signed_in? %>
     <% if post.post_comments.exists?(customer_id: current_customer.id) %>

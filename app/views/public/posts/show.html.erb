@@ -3,7 +3,7 @@
   <%= render 'layouts/flash_message' %>
   </div>
   <div class="row">
-    <div class="col-md-8 pt-5 offset-md-2">
+    <div class="col-md-8 pt-5 offset-md-2 show-content">
       <h4>
         <%= link_to movie_path(@post.movie_id) do %>
           "<%= @post.title %>"
@@ -12,14 +12,12 @@
       <h4 class="border-bottom"><%= @post.customer.name %>さんのレビュー</h4>
 
       <div class="row">
-        <div class="col-md-2 mt-2">
+        <div class="col-md-12 mt-2 d-inline-flex align-items-center show-profile">
           <%= link_to customer_path(@customer.id) do %>
             <%= image_tag @post.customer.get_profile_image, class: "rounded-circle", size: '80x80' %>
           <% end %>
-        </div><%#プロフィール画像%>
-        <div class="col-md-10 mt-2">
           <h5 class="text-primary"><%= @post.review_title %></h5>
-        </div><%#レビュータイトル%>
+        </div><%#プロフィール画像、レビュータイトル%>
       </div>
       <div class="row">
         <%= render 'rate', post: @post %>
@@ -39,7 +37,7 @@
       <div class="row pb-5">
         <%= render 'public/favorites/btn', post: @post %><%# いいねボタン%>
         <%= render 'public/post_comments/btn', post: @post %> <%# コメントボタン %>
-        <div class="col-md-2 offset-md-2 pb-3">
+        <div class="col-md-2 pb-3">
         <% if @customer == current_customer %>
           <div class="float-right d-inline-flex">
             <%= link_to edit_post_path, class: "text-success text-decoration-none" do %>
