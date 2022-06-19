@@ -112,7 +112,7 @@ header {
 .sign-in-bg {
   height: 100vh;
   width: 100%;
-  background-image: url('clapperboard.jpeg');
+  background-image: image-url('clapperboard.jpeg');
   background-size: cover;
   background-position: left;
   position: relative;
@@ -144,7 +144,7 @@ header {
 }
 
 .sign-up-bg {
-  background-image: url('films.jpeg');
+  background-image: image-url('films.jpeg');
   background-size: cover;
   background-position: center;
 }

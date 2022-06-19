@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .top-image {
   height: 600px;
-  background-image: url('top-bg.jpeg');
+  background-image: image-url('top-bg.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -18,7 +18,7 @@
 }
 
 .top-main-title {
-  background-image: url('film.jpeg');
+  background-image: image-url('film.jpeg');
   background-size: contain;
   height: 100px;
 }
@@ -41,7 +41,7 @@
 .about-bg {
   min-height: 100vh;
   width: 100%;
-  background-image: url('theator.jpeg');
+  background-image: image-url('theator.jpeg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -130,7 +130,7 @@
   }
 
   .top-main-title {
-    background-image: url('film.jpeg');
+    background-image: image-url('film.jpeg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -183,7 +183,7 @@
 	  min-height: 0;
     height: 260px;
     width: 100%;
-    background-image: url('theator.jpeg');
+    background-image: image-url('theator.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
