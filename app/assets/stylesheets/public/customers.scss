@@ -2,34 +2,40 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+/*マイページのサイドバー*/
 .show-side-bar {
   width: 20%;
   padding-top: 100px;
   height: 100vh;
-  position: fixed;
+  position: fixed;//画面の横に固定
   top: 0;
   background: #ebf6f7;
 }
 
+/*過去の投稿などの映画のポスターサイズ*/
 .show-movie-poster img {
   width: 100%;
 }
 
+/*スマホ画面でのタブメニュー、PC画面では非表示に*/
 .show-tab-menu-small {
   display: none;
 }
 
+/*各メニューの見出しに下線*/
 .show-tab-title {
   border-bottom: groove 10px #59b9c6;
 }
 
+/*フォロー・フォロワーリストの各アカウントの横幅*/
 .relationships-list {
   width: 300px;
   position: relative;
 }
 
+/*相互フォローのアカウントに表示するタグ*/
 .ff-tag {
-  position: absolute;
+  position: absolute;//relationship-listに対して
   top: 0;
   left: 0px;
   color: white;
@@ -38,6 +44,7 @@
   border-radius: 30px;
 }
 
+/*見出し下のタグの説明文*/
 .ff-tag-explanation {
   color: white;
   background: #59b9c6;
@@ -45,14 +52,17 @@
   border-radius: 30px;
 }
 
+/*視聴済み、ウィッシュリスト（以下:リスト）のポスター画像のpositionをrelativeに*/
 .list-poster-image {
   position: relative;
 }
 
+/*リストのポスター画像のサイズ*/
 .list-poster-image img {
   width: 100%;
 }
 
+/*また観たい、レビュー済みのタグの配置*/
 .list-poster-tag {
   position: absolute;
   top: 0;
@@ -60,6 +70,7 @@
   display: flex;
 }
 
+/*また観たいタグの装飾*/
 .list-tag {
   padding: 10px 5px;
   background:  #00a3af;
@@ -67,6 +78,7 @@
   border-radius:  4px;
 }
 
+/*レビュー済みタグの装飾*/
 .post-tag {
   padding: 10px 5px;
   background:  #38b48b;
@@ -74,16 +86,17 @@
   border-radius:  4px;
 }
 
-
+/*また観たいタグの説明文*/
 .star {
   color: #00a3af;
 }
 
+/*レビュー済みタグの説明文*/
 .pen {
   color: #38b48b;
 }
 
-
+/*以下サイドバー内のタブメニューの記述*/
 #tab-menu {
   margin: 30px 0;
 }
@@ -133,13 +146,19 @@
 }
 
 @media screen and (max-width: 991px) {
+  /*991px以下に適用されるCSS（タブレット用）サイズはbootstrap4のブレークポイントに準拠*/
+
+  /*タブレットサイズ以下ではサイドバーを非表示化*/
   .show-side-bar {
     display: none;
   }
+
+  /*タブレットサイズ以下の場合のタブメニューの表示*/
   .show-tab-menu-small {
     display: block;
   }
 
+  /*以下タブメニューの装飾*/
   #tab-menu {
     width: 90%;
     margin: 0 auto;
@@ -154,7 +173,4 @@
   #tab-contents .tab {
     padding: 0px;
   }
-}
-
-@media screen and (max-width: 543px) {
 }

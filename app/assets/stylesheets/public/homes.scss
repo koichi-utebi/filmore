@@ -1,6 +1,8 @@
 // Place all the styles related to the public/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+/*トップ画面の背景*/
 .top-image {
   height: 600px;
   background-image: image-url('top-bg.jpeg');
@@ -10,6 +12,7 @@
   position: relative;
 }
 
+/*トップ画面の標語*/
 .top-text {
   width: 80%;
   position: absolute;
@@ -17,12 +20,14 @@
   left: 30%;
 }
 
+/*トップ画面のコンテンツの見出し「今話題の映画」の背景画像*/
 .top-main-title {
   background-image: image-url('film.jpeg');
   background-size: contain;
   height: 100px;
 }
 
+/*トップ画面のコンテンツの見出しのフォントの色と縁取り*/
 .top-main-title h2 {
   color: #fff;
   text-shadow: 2px 2px 0 #000,
@@ -32,12 +37,14 @@
   line-height: 100px;
 }
 
+/*トップ画面の映画ポスターのサイズ*/
 .top-poster img {
   width: 100%;
   object-fit: cover;
   aspect-ratio: 2 / 3;
 }
 
+/*アバウト画面の背景*/
 .about-bg {
   min-height: 100vh;
   width: 100%;
@@ -49,22 +56,25 @@
   align-items: center;
 }
 
+/*アバウト画面の標語*/
 .about-contents {
   width: 100%;
   height: 100%;
   margin: 0 auto;
 }
 
+/*アバウト画面のロゴサイズ*/
 .about-contents img {
   width: 40%;
   margin-top: 10%;
 }
 
+/*アバウト画面の標語のフォントサイズ*/
 .about-contents h2 {
   font-size: 2vw;
 }
 
-
+/*アバウト画面の各文が表示されている要素*/
 .about-text {
   display: flex;
   width: 80%;
@@ -72,6 +82,7 @@
   justify-content: center;
 }
 
+/*アバウト画面の各文章*/
 .text {
   width: 30%;
   height: 30%;
@@ -82,21 +93,26 @@
   font-size: 1vw;
 }
 
+/*アバウト画面の各文章のフォントサイズ*/
 .text h3 {
   font-size: 1.5vw;
 }
 
+/*スマホ画面でのアバウト画面の各文章、PC画面では非表示*/
 .about-small-contents {
   display: none;
 }
 
-@media screen and (max-width: 959px) {
-  /* 959px以下に適用されるCSS（タブレット用） */
+@media screen and (max-width: 991px) {
+  /*991px以下に適用されるCSS（タブレット用）サイズはbootstrap4のブレークポイントに準拠*/
+
+  /*トップ画面背景画像のサイズ変更*/
   .top-image {
     height: auto;
     aspect-ratio: 2 / 1;
   }
 
+  /*トップ画面背景画像に白半透明の背景画像を重ねる*/
   .top-image::after {
     content: '';
     background-color: rgba(255, 255, 255, 0.5);
@@ -109,6 +125,7 @@
     aspect-ratio: 2/1;
   }
 
+  /*標語の位置調整*/
   .top-text {
     width: 80%;
     position: absolute;
@@ -117,18 +134,22 @@
     z-index: 1;
   }
 
+  /*標語のロゴサイズ変更*/
   .top-text img {
     width: 60%;
   }
 
+  /*標語のフォントサイズ調整*/
   .top-text h1 {
     font-size: 4vw;
   }
 
+  /*標語のフォントサイズ調整*/
   .top-text h3 {
     font-size: 3vw;
   }
 
+  /*コンテンツの見出しの背景画像を調整*/
   .top-main-title {
     background-image: image-url('film.jpeg');
     background-size: contain;
@@ -137,48 +158,61 @@
     height: auto;
   }
 
+  /*アバウト画面の標語内ロゴサイズ調整*/
   .about-contents img {
     width: 60%;
     margin-top: 0;
   }
+
+  /*標語のフォントサイズ調整*/
   .about-contents h2 {
     font-size: 3vw;
   }
+
+  /*各文章のフォントサイズ調整*/
   .text h3 {
     font-size: 2vw;
   }
 }
 
-@media screen and (max-width: 480px) {
-	/* 480px以下に適用されるCSS（スマホ用） */
+@media screen and (max-width: 544px) {
+	/* 544px以下に適用されるCSS（スマホ用）サイズはbootstrap4のブレークポイントに準拠 */
 
+  /*トップ画面の背景サイズ調整*/
   .top-image {
     height: 220px;
     aspect-ratio: auto;
   }
 
+  /*背景上の背景色サイズ調整*/
   .top-image::after {
     height: 220px;
     aspect-ratio: auto;
   }
 
+  /*標語の位置調整*/
 	.top-text {
 	  width: 100%;
 	  left: 0;
 	  top: 20%;
 	}
+
+	/*標語のフォントサイズ調整*/
 	.top-text h1{
 	  font-size: 5vw;
 	}
 
+  /*標語のフォントサイズ調整*/
 	.top-text h3 {
 	  font-size: 4vw;
 	}
 
+  /*コンテンツの見出しのフォントサイズ調整*/
   .top-main-title h2 {
     font-size: 5vw;
   }
 
+  /*アバウト画面の背景画像調整*/
 	.about-bg {
 	  min-height: 0;
     height: 260px;
@@ -189,18 +223,23 @@
     background-position: top;
     display: flex;
   }
+
+  /*ロゴのいち調整*/
   .about-contents {
     height: 60px;
   }
 
+  /*標語を非表示化*/
   .about-contents h2 {
     display: none;
   }
 
+  /*各文章の非表示化*/
   .about-text {
     display: none;
   }
 
+  /*スマホ画面用の標語と各文章の表示*/
   .about-small-contents {
     display: block;
   }

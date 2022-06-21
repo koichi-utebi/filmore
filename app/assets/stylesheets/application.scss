@@ -22,46 +22,52 @@
   box-sizing: border-box;
 }
 
+/*全ての画面の高さの最低値を100vhに指定*/
 main {
   min-height: 100vh;
 }
 
+/*新規登録時などのエラーメッセージ文*/
 #error_explanation {
-  background-color: rgba(128,128,128,0.8);
-  width: 500px;
-  padding: 10px;
+  width: 100%;
   color: white;
-  border: solid 2px red;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
+/*ヘッダーの装飾*/
 header {
   background: #ebf6f7;
   position: relative;
-  z-index: 10;
+  z-index: 10;//マイページのサイドバーより前に表示するための記述
 }
 
+/*ヘッダーの装飾*/
 .header-search-form {
   width: 90%;
 }
 
+/*ヘッダー内のロゴ*/
 .logo img {
   width: 220px;
 }
 
+/*エラーメッセージ表示時のフォームの崩れを防ぐための記述*/
 .field_with_errors {
   display: contents;
 }
 
+/*各ページの遷移用のアイコンのポジションを指定*/
 .header-icons {
   position: relative;
 }
 
+/*遷移用アイコンの色*/
 .icon {
   color: rgb(75, 75, 75);
 }
 
+/*マウスホバー時のアイコン下のテキスト*/
 .header-text {
   display: none;
   width: 150px;
@@ -75,6 +81,8 @@ header {
   color: white;
   z-index: 10;
 }
+
+/*マウスホバー時のアイコン下のテキスト装飾*/
 .header-text:after {
   position: absolute;
   width: 0;
@@ -86,11 +94,12 @@ header {
   pointer-events: none;
   content: " ";
 }
+
 .header-icons:hover + .header-text {
   display: block;
 }
 
-/*エラーメッセージ*/
+/*フラッシュメッセージ*/
 #notice{
   color: green;
   font-size: 20px;
@@ -100,6 +109,7 @@ header {
   z-index: 1;
 }
 
+/*エラーメッセージ*/
 #alert {
   color: red;
   font-size: 20px;
@@ -109,6 +119,7 @@ header {
   z-index: 1;
 }
 
+/*ログイン画面の背景*/
 .sign-in-bg {
   height: 100vh;
   width: 100%;
@@ -118,6 +129,7 @@ header {
   position: relative;
 }
 
+/*ログイン画面の文章*/
 .sign-in-text {
   font-family: Chalkduster;
   color: white;
@@ -127,10 +139,12 @@ header {
   left: 5%;
 }
 
+/*ログイン画面の文章の行間を調整*/
 .sign-in-text h3 {
   line-height: 2em;
 }
 
+/*ログイン画面の入力フォーム*/
 .sign-in-form {
   background: rgba(255,255,255,0.8);
   position: absolute;
@@ -143,12 +157,14 @@ header {
   border-radius: 10px;
 }
 
+/*新規登録画面の背景*/
 .sign-up-bg {
   background-image: image-url('films.jpeg');
   background-size: cover;
   background-position: center;
 }
 
+/*新規登録画面の入力フォーム*/
 .sign-up-form {
   height: 100vh;
   background: rgba(255,255,255,0.8);
@@ -159,6 +175,9 @@ header {
 }
 
 @media screen and (max-width: 991px) {
+  /*991px以下に適用されるCSS（タブレット用）サイズはbootstrap4のブレークポイントに準拠*/
+
+  /*タブレット画面でのログイン画面入力フォーム*/
   .sign-in-form {
     position: relative;
     height: 380px;
@@ -166,18 +185,21 @@ header {
     margin: 0 auto;
     right: 0;
   }
-
+  /*タブレットサイズ以下ではログイン画面の文字を非表示*/
   .sign-in-text {
     display: none;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 544px) {
+  /* 544px以下に適用されるCSS（スマホ用）サイズはbootstrap4のブレークポイントに準拠 */
+  
+  /*携帯端末でのログイン入力フォーム*/
   .sign-in-form {
     top: 10%;
     width: 90%;
   }
-
+  /*入力フォームの見出しのフォントを縮小*/
   .sign-in-form h2 {
     font-size: 20px;
   }

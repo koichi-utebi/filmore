@@ -2,68 +2,61 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+/*映画一覧画面のジャンルが記載されたサイドバー*/
 .index-side-bar {
   position: sticky;
   top: 20px;
   bottom: 0px;
 }
 
+/*映画ポスターのサイズ指定*/
 .index-content-area img {
   width: 100%;
 }
 
-
-.index-small-contents img {
-  width: 100%;
-}
-
+/*タブレットサイズ以下のでジャンル表示 PC画面で非表示*/
 .index-small-genres {
   display: none;
 }
 
+/*映画詳細ページのポスターの位置を固定*/
 .show-poster-img {
   position: fixed;
 }
 
+/*ポスター画像のサイズを指定*/
 .poster-img {
   width: 25% !important;
 }
 
+/*平均評価の星の画像と点数を横並びに*/
 .show-avg-score {
   display: flex;
 }
 
+/*レビュー一覧の見出しなどの下二重線*/
 .show-content-tag {
   border-bottom: double #000;
 }
 
-.show-review-body {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.show-list-links p {
-  font-size:  0.8rem;
-}
-
 @media screen and (max-width: 991px) {
+  /*991px以下に適用されるCSS（タブレット用）サイズはbootstrap4のブレークポイントに準拠*/
   .index-side-bar {
     display: none;
   }
 
+  /*タブレットサイズ以下でのジャンル表示*/
   .index-small-genres {
     display: block;
   }
+
+  /*映画ポスターの位置固定解除*/
   .show-poster-img {
     position: relative;
   }
-  
+
+  /*ポスター画像サイズ変更*/
   .poster-img {
     width: 100% !important;
   }
-}
-
-@media screen and (max-width: 575px) {
-
-
 }
