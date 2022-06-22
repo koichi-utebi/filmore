@@ -21,11 +21,11 @@
     <% else %>
       <div class="text-center">
         <% if current_customer.following?(customer) %>
-          <%= link_to customer_relationships_path(customer.id), method: :delete, class: "text-primary text-decoration-none" do %>
+          <%= link_to customer_relationships_path(customer.id), method: :delete, class: "text-primary text-decoration-none", remote: true do %>
             <i class="fas fa-user-check fa-2x"></i>フォロー済
           <% end %>
         <% else %>
-          <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary text-decoration-none" do %>
+          <%= link_to customer_relationships_path(customer.id), method: :post, class: "text-primary text-decoration-none", remote: true do %>
             <i class="fas fa-user-plus fa-2x"></i>フォロー
           <% end %>
         <% end %>
