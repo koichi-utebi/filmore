@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col-md-10 offset-md-2 border-bottom pb-3 mb-3">
           <div class="float-right">
-            <%= link_to post_post_comments_path(post_comment.post_id), method: :delete, class: "text-danger text-decoration-none" do %>
+            <%= link_to post_post_comments_path(post_comment.post_id), method: :delete, remote: true,class: "text-danger text-decoration-none", data: { confirm: "本当に削除しますか?"} do %>
               <i class="fas fa-trash-alt"></i>
             <% end %>
           </div>

@@ -14,6 +14,7 @@ class Public::PostsController < Public::ApplicationController
   def new
     if customer_signed_in?
       @post = Post.new(post_params)
+      #会員がその映画のレビューを既に投稿済みかどうかを判別
       @current_customer_post = Post.find_by(customer_id: current_customer.id, movie_id: @post.movie_id)
       if @current_customer_post.present?
         redirect_to movies_path
@@ -52,7 +53,11 @@ class Public::PostsController < Public::ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "レビューを更新しました"
+      if @post.is_active == false
+        redirect_to posts_path, alert: "レビューを削除しました"
+      else
+        redirect_to post_path(@post), notice: "レビューを更新しました"
+      end
     else
       render :edit
     end

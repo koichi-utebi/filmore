@@ -12,7 +12,7 @@ class Public::PostCommentsController < Public::ApplicationController
     @comment = current_customer.post_comments.new(post_comment_params)
       @comment.post_id = @post.id
       @comment.customer_id = current_customer.id
-      @comment.save!
+      @comment.save
       redirect_to post_path(@post), notice: "コメントを投稿しました"
   end
 
@@ -20,7 +20,6 @@ class Public::PostCommentsController < Public::ApplicationController
     post = Post.find(params[:post_id])
     @comment = PostComment.find_by(post_id: post.id)
     @comment.destroy
-    redirect_to request.referer, alert: "コメントを削除しました"
   end
 
   private

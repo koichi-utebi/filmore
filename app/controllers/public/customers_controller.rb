@@ -2,14 +2,18 @@ class Public::CustomersController < Public::ApplicationController
   before_action :authenticate_customer!, except: [:show]
   def show
     @customer = Customer.find(params[:id])
+    #会員ごとの投稿一覧
     @posts = @customer.posts.where(is_active: true).latest.page(params[:page]).per(10)
 
+    #会員ごとのリストの映画一覧
     @watched_lists = @customer.watched_lists.latest
     @wish_lists = @customer.wish_lists.latest
 
+    #会員ごとのフォロー・フォロワーリスト
     @customer_followings = @customer.followings
     @customer_followers = @customer.followers
 
+    #会員ごとのいいねした投稿
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end
