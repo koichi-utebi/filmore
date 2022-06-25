@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :movies, only: [:index, :show]                                    #映画関連
     get '/search' => 'movies#search', as: 'search'                              #映画タイトル検索
     get '/genre_search' => 'movies#genre_search', as: 'genre_search'            #ジャンル絞り込み
-    get '/posts/check' => 'posts#check', as: 'check_post'                         #新規投稿確認ページ
+    post '/posts/check' => 'posts#check', as: 'check_post'                         #新規投稿確認ページ
     resources :posts do                                                           #投稿関連
       resource :favorites, only: [:create, :destroy]                                #いいね関連
       resource :post_comments, only: [:new, :create, :destroy]                      #コメント関連
