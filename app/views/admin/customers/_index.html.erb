@@ -17,7 +17,7 @@
           <%= customer.id %>
         </td>
         <td class="align-middle">
-          <%= link_to admin_customer_path(customer), class: "text-decoration-none" do %>
+          <%= link_to customer_path(customer), class: "text-decoration-none" do %>
             <%= image_tag customer.get_profile_image, class: "rounded-circle", size: "70x70" %>
             <span><%= customer.name %></span>
           <% end %>
