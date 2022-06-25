@@ -7,7 +7,7 @@
 
   <div class="row mt-3 mb-5">
     <div class="col-md-8 offset-md-2 border">
-      <%= form_with model: @post, url: check_post_path, method: :post do |f| %>
+      <%= form_with model: @post, url: check_post_path, method: :get do |f| %>
       <div class="form-group d-inline-flex mt-4">
         <div class="mr-3"><h5>採点 :</h5></div>
         <div id="star" >
