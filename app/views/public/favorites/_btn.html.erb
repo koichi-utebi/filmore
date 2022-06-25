@@ -1,13 +1,13 @@
-<div class="col-md-3 offset-md-2">
+<div class="col-md-3 offset-md-2" id="favorite-btn">
   <% if customer_signed_in? %>
     <% if post.favorited_by?(current_customer) %>
       <span><%= post.favorites.count %>:</span>
-      <%= link_to post_favorites_path(post), method: :delete do %>
+      <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
         <i class="fas fa-thumbs-up"></i>いいね済
       <% end %>
     <% else %>
       <span><%= post.favorites.count %>:</span>
-      <%= link_to post_favorites_path(post), method: :post do %>
+      <%= link_to post_favorites_path(post), method: :post, remote: true do %>
         <i class="far fa-thumbs-up"></i>いいね!
       <% end %>
     <% end %>
