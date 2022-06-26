@@ -162,13 +162,13 @@ header {
   background-image: image-url('films.jpeg');
   background-size: cover;
   background-position: center;
+  min-height: 100vh;
 }
 
 /*新規登録画面の入力フォーム*/
 .sign-up-form {
-  height: 100vh;
   background: rgba(255,255,255,0.8);
-  padding-top: 100px;
+  padding-top: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -193,7 +193,7 @@ header {
 
 @media screen and (max-width: 544px) {
   /* 544px以下に適用されるCSS（スマホ用）サイズはbootstrap4のブレークポイントに準拠 */
-  
+
   /*携帯端末でのログイン入力フォーム*/
   .sign-in-form {
     top: 10%;
