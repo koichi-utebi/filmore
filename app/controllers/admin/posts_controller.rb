@@ -30,7 +30,7 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def post_sort
-    case params[:sort_posts]
+    case params[:sort_obj]
     when "old"
       @posts = Post.page(params[:page])
       render "index"

@@ -1,5 +1,5 @@
 <%= form_with url: link, method: :get, class: "form-inline d-flex justify-content-center" do |f| %>
-  <%= f.select :sort_posts, [["新着順(Default)", "new"], ["古い順", "old"]], {}, class: "form-control w-75" %>
+  <%= f.select :sort_obj, [["新着順(Default)", "new"], ["古い順", "old"]], {}, class: "form-control w-75" %>
   <%= f.button :type => 'submit', class: "btn btn-outline-primary" do %>
     <i class="fas fa-sort-amount-down"></i>
   <% end %>

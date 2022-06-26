@@ -3,17 +3,6 @@ class Admin::CustomersController < Admin::ApplicationController
     @customers = Customer.latest.page(params[:page]).per(20)
   end
 
-  def show
-    @customer = Customer.find(params[:id])
-    @posts = @customer.posts.latest.page(params[:page]).per(10)
-    @watched_lists = @customer.watched_lists.latest
-    @wish_lists = @customer.wish_lists.latest
-    @customer_followings = @customer.followings
-    @customer_followers = @customer.followers
-    favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
-  end
-
   def edit
     @customer = Customer.find(params[:id])
   end
@@ -35,7 +24,7 @@ class Admin::CustomersController < Admin::ApplicationController
   end
 
   def customer_sort
-    case params[:sort_customers]
+    case params[:sort_obj]
     when "old"
       @customers = Customer.page(params[:page])
       render "index"
